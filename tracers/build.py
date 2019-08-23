@@ -140,7 +140,6 @@ def build_pt():
     os.chdir(pwd)
 
 def main():
-    print (len(sys.argv))
     if len(sys.argv) == 1:
         build_dynamorio()
         build_pin()
