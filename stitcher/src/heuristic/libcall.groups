@@ -1,0 +1,2232 @@
+{
+    "Simple Output": [
+        "fputc", 
+        "fputc_unlocked", 
+        "fputs", 
+        "fputs_unlocked", 
+        "fputwc", 
+        "fputwc_unlocked", 
+        "fputws", 
+        "fputws_unlocked", 
+        "putc", 
+        "putchar", 
+        "putchar_unlocked", 
+        "putc_unlocked", 
+        "puts", 
+        "putw", 
+        "putwc", 
+        "putwchar", 
+        "putwchar_unlocked", 
+        "putwc_unlocked"
+    ], 
+    "Tracing malloc": [
+        "mtrace", 
+        "muntrace"
+    ], 
+    "Preparing for Obstacks": [
+        "obstack_chunk_alloc", 
+        "obstack_chunk_free", 
+        "obstack_init"
+    ], 
+    "EOF and Errors": [
+        "feof", 
+        "feof_unlocked", 
+        "ferror", 
+        "ferror_unlocked"
+    ], 
+    "System V contexts": [
+        "getcontext", 
+        "makecontext", 
+        "setcontext", 
+        "swapcontext"
+    ], 
+    "Signaling Another Process": [
+        "kill", 
+        "killpg"
+    ], 
+    "Rounding": [
+        "fegetround", 
+        "fesetround"
+    ], 
+    "Scanning All Users": [
+        "endpwent", 
+        "fgetpwent", 
+        "fgetpwent_r", 
+        "getpwent", 
+        "getpwent_r", 
+        "setpwent"
+    ], 
+    "Printing of Floats": [
+        "strfromd", 
+        "strfromf", 
+        "strfromfN", 
+        "strfromfNx", 
+        "strfroml"
+    ], 
+    "Statistics of Malloc": [
+        "mallinfo"
+    ], 
+    "mtab": [
+        "addmntent", 
+        "endmntent", 
+        "getmntent", 
+        "getmntent_r", 
+        "hasmntopt", 
+        "setmntent"
+    ], 
+    "Temporary Files": [
+        "mkdtemp", 
+        "mkstemp", 
+        "mktemp", 
+        "tempnam", 
+        "tmpfile", 
+        "tmpfile64", 
+        "tmpnam", 
+        "tmpnam_r"
+    ], 
+    "Concatenating Strings": [
+        "strcat", 
+        "wcscat"
+    ], 
+    "Truncating Strings": [
+        "stpncpy", 
+        "strncat", 
+        "strncpy", 
+        "strndup", 
+        "strndupa", 
+        "wcpncpy", 
+        "wcsncat", 
+        "wcsncpy"
+    ], 
+    "Adding Severity Classes": [
+        "addseverity"
+    ], 
+    "String Streams": [
+        "fmemopen", 
+        "open_memstream"
+    ], 
+    "Using Pause": [
+        "pause"
+    ], 
+    "Traditional Scheduling Functions": [
+        "getpriority", 
+        "nice", 
+        "setpriority"
+    ], 
+    "Converting Strings": [
+        "mbsnrtowcs", 
+        "mbsrtowcs", 
+        "wcsnrtombs", 
+        "wcsrtombs"
+    ], 
+    "Opening Streams": [
+        "__freadable", 
+        "__freading", 
+        "__fwritable", 
+        "__fwriting", 
+        "fopen", 
+        "fopen64", 
+        "freopen", 
+        "freopen64"
+    ], 
+    "Keeping the state": [
+        "mbsinit"
+    ], 
+    "Deleting Files": [
+        "remove", 
+        "rmdir", 
+        "unlink"
+    ], 
+    "Creating Directories": [
+        "mkdir"
+    ], 
+    "General Time String Parsing": [
+        "getdate", 
+        "getdate_r"
+    ], 
+    "Hard Links": [
+        "link", 
+        "linkat"
+    ], 
+    "Random Access Directory": [
+        "rewinddir", 
+        "seekdir", 
+        "telldir"
+    ], 
+    "Obstacks Data Alignment": [
+        "obstack_alignment_mask"
+    ], 
+    "BSD Terminal Modes": [
+        "gtty", 
+        "stty"
+    ], 
+    "Argp": [
+        "argp_parse"
+    ], 
+    "Host Names": [
+        "endhostent", 
+        "gethostbyaddr", 
+        "gethostbyaddr_r", 
+        "gethostbyname", 
+        "gethostbyname2", 
+        "gethostbyname2_r", 
+        "gethostbyname_r", 
+        "gethostent", 
+        "sethostent"
+    ], 
+    "Flushing Buffers": [
+        "_flushlbf", 
+        "__fpurge", 
+        "fflush", 
+        "fflush_unlocked"
+    ], 
+    "Lookup User": [
+        "getpwnam", 
+        "getpwnam_r", 
+        "getpwuid", 
+        "getpwuid_r"
+    ], 
+    "Closing a Socket": [
+        "shutdown"
+    ], 
+    "Growing Objects": [
+        "obstack_1grow", 
+        "obstack_blank", 
+        "obstack_finish", 
+        "obstack_grow", 
+        "obstack_grow0", 
+        "obstack_int_grow", 
+        "obstack_object_size", 
+        "obstack_ptr_grow"
+    ], 
+    "Allocation": [
+        "getpt", 
+        "grantpt", 
+        "ptsname", 
+        "ptsname_r", 
+        "unlockpt"
+    ], 
+    "Who Logged In": [
+        "cuserid", 
+        "getlogin"
+    ], 
+    "Accepting Connections": [
+        "accept"
+    ], 
+    "Sysconf Definition": [
+        "sysconf"
+    ], 
+    "File Times": [
+        "futimes", 
+        "lutimes", 
+        "utime", 
+        "utimes"
+    ], 
+    "The Lame Way to Locale Data": [
+        "localeconv"
+    ], 
+    "Setting Groups": [
+        "getgrouplist", 
+        "initgroups", 
+        "setegid", 
+        "setgid", 
+        "setgroups", 
+        "setregid"
+    ], 
+    "Search Functions": [
+        "index", 
+        "memchr", 
+        "memmem", 
+        "memrchr", 
+        "rawmemchr", 
+        "rindex", 
+        "strcasestr", 
+        "strchr", 
+        "strchrnul", 
+        "strcspn", 
+        "strpbrk", 
+        "strrchr", 
+        "strspn", 
+        "strstr", 
+        "wcschr", 
+        "wcschrnul", 
+        "wcscspn", 
+        "wcspbrk", 
+        "wcsrchr", 
+        "wcsspn", 
+        "wcsstr", 
+        "wcswcs", 
+        "wmemchr"
+    ], 
+    "Copying Strings and Arrays": [
+        "bcopy", 
+        "bzero", 
+        "memccpy", 
+        "memcpy", 
+        "memmove", 
+        "mempcpy", 
+        "memset", 
+        "stpcpy", 
+        "strcpy", 
+        "strdup", 
+        "strdupa", 
+        "wcpcpy", 
+        "wcscpy", 
+        "wcsdup", 
+        "wmemcpy", 
+        "wmemmove", 
+        "wmempcpy", 
+        "wmemset"
+    ], 
+    "ISO Random": [
+        "rand", 
+        "rand_r", 
+        "srand"
+    ], 
+    "Regexp Cleanup": [
+        "regerror", 
+        "regfree"
+    ], 
+    "Opening a Directory": [
+        "dirfd", 
+        "fdopendir", 
+        "opendir"
+    ], 
+    "Waiting for I/O": [
+        "FD_CLR", 
+        "FD_ISSET", 
+        "FD_SET", 
+        "FD_ZERO", 
+        "select"
+    ], 
+    "Unpredictable Bytes": [
+        "getentropy", 
+        "getrandom"
+    ], 
+    "Using Getopt": [
+        "getopt"
+    ], 
+    "Allocation in an Obstack": [
+        "obstack_alloc", 
+        "obstack_copy", 
+        "obstack_copy0"
+    ], 
+    "Finding Tokens in a String": [
+        "basename", 
+        "dirname", 
+        "strsep", 
+        "strtok", 
+        "strtok_r", 
+        "wcstok"
+    ], 
+    "Yes-or-No Questions": [
+        "rpmatch"
+    ], 
+    "Socket Pairs": [
+        "socketpair"
+    ], 
+    "Line Speed": [
+        "cfgetispeed", 
+        "cfgetospeed", 
+        "cfsetispeed", 
+        "cfsetospeed", 
+        "cfsetspeed"
+    ], 
+    "Testing File Type": [
+        "S_ISBLK", 
+        "S_ISCHR", 
+        "S_ISDIR", 
+        "S_ISFIFO", 
+        "S_ISLNK", 
+        "S_ISREG", 
+        "S_ISSOCK", 
+        "S_TYPEISMQ", 
+        "S_TYPEISSEM", 
+        "S_TYPEISSHM"
+    ], 
+    "Backtraces": [
+        "backtrace", 
+        "backtrace_symbols", 
+        "backtrace_symbols_fd"
+    ], 
+    "Process Group Functions": [
+        "getpgid", 
+        "getpgrp", 
+        "getsid", 
+        "setpgid", 
+        "setpgrp", 
+        "setsid"
+    ], 
+    "Reading Address": [
+        "getsockname"
+    ], 
+    "Aligned Memory Blocks": [
+        "aligned_alloc", 
+        "memalign", 
+        "posix_memalign", 
+        "valloc"
+    ], 
+    "Executing a File": [
+        "execl", 
+        "execle", 
+        "execlp", 
+        "execv", 
+        "execve", 
+        "execvp"
+    ], 
+    "Cancel AIO Operations": [
+        "aio_cancel", 
+        "aio_cancel64"
+    ], 
+    "Exponents and Logarithms": [
+        "cbrt", 
+        "cbrtf", 
+        "cbrtfN", 
+        "cbrtfNx", 
+        "cbrtl", 
+        "cexp", 
+        "cexpf", 
+        "cexpfN", 
+        "cexpfNx", 
+        "cexpl", 
+        "clog", 
+        "clog10", 
+        "clog10f", 
+        "clog10fN", 
+        "clog10fNx", 
+        "clog10l", 
+        "clogf", 
+        "clogfN", 
+        "clogfNx", 
+        "clogl", 
+        "cpow", 
+        "cpowf", 
+        "cpowfN", 
+        "cpowfNx", 
+        "cpowl", 
+        "csqrt", 
+        "csqrtf", 
+        "csqrtfN", 
+        "csqrtfNx", 
+        "csqrtl", 
+        "exp", 
+        "exp10", 
+        "exp10f", 
+        "exp10fN", 
+        "exp10fNx", 
+        "exp10l", 
+        "exp2", 
+        "exp2f", 
+        "exp2fN", 
+        "exp2fNx", 
+        "exp2l", 
+        "expf", 
+        "expfN", 
+        "expfNx", 
+        "expl", 
+        "expm1", 
+        "expm1f", 
+        "expm1fN", 
+        "expm1fNx", 
+        "expm1l", 
+        "hypot", 
+        "hypotf", 
+        "hypotfN", 
+        "hypotfNx", 
+        "hypotl", 
+        "ilogb", 
+        "ilogbf", 
+        "ilogbfN", 
+        "ilogbfNx", 
+        "ilogbl", 
+        "llogb", 
+        "llogbf", 
+        "llogbfN", 
+        "llogbfNx", 
+        "llogbl", 
+        "log", 
+        "log10", 
+        "log10f", 
+        "log10fN", 
+        "log10fNx", 
+        "log10l", 
+        "log1p", 
+        "log1pf", 
+        "log1pfN", 
+        "log1pfNx", 
+        "log1pl", 
+        "log2", 
+        "log2f", 
+        "log2fN", 
+        "log2fNx", 
+        "log2l", 
+        "logb", 
+        "logbf", 
+        "logbfN", 
+        "logbfNx", 
+        "logbl", 
+        "logf", 
+        "logfN", 
+        "logfNx", 
+        "logl", 
+        "pow", 
+        "powf", 
+        "powfN", 
+        "powfNx", 
+        "powl", 
+        "sqrt", 
+        "sqrtf", 
+        "sqrtfN", 
+        "sqrtfNx", 
+        "sqrtl"
+    ], 
+    "Classification of Wide Characters": [
+        "iswalnum", 
+        "iswalpha", 
+        "iswblank", 
+        "iswcntrl", 
+        "iswctype", 
+        "iswdigit", 
+        "iswgraph", 
+        "iswlower", 
+        "iswprint", 
+        "iswpunct", 
+        "iswspace", 
+        "iswupper", 
+        "iswxdigit", 
+        "wctype"
+    ], 
+    "Block Input/Output": [
+        "fread", 
+        "fread_unlocked", 
+        "fwrite", 
+        "fwrite_unlocked"
+    ], 
+    "Running a Command": [
+        "system"
+    ], 
+    "Elapsed Time": [
+        "difftime"
+    ], 
+    "Reading Persona": [
+        "getegid", 
+        "geteuid", 
+        "getgid", 
+        "getgroups", 
+        "getuid"
+    ], 
+    "Normal Termination": [
+        "exit"
+    ], 
+    "PowerPC": [
+        "__ppc_get_timebase", 
+        "__ppc_get_timebase_freq", 
+        "__ppc_mdoio", 
+        "__ppc_mdoom", 
+        "__ppc_set_ppr_low", 
+        "__ppc_set_ppr_med", 
+        "__ppc_set_ppr_med_high", 
+        "__ppc_set_ppr_med_low", 
+        "__ppc_set_ppr_very_low", 
+        "__ppc_yield"
+    ], 
+    "Time Zone Functions": [
+        "tzset"
+    ], 
+    "Calling Wordexp": [
+        "wordexp", 
+        "wordfree"
+    ], 
+    "FP Bit Twiddling": [
+        "canonicalize", 
+        "canonicalizef", 
+        "canonicalizefN", 
+        "canonicalizefNx", 
+        "canonicalizel", 
+        "copysign", 
+        "copysignf", 
+        "copysignfN", 
+        "copysignfNx", 
+        "copysignl", 
+        "getpayload", 
+        "getpayloadf", 
+        "getpayloadfN", 
+        "getpayloadfNx", 
+        "getpayloadl", 
+        "nan", 
+        "nanf", 
+        "nanfN", 
+        "nanfNx", 
+        "nanl", 
+        "nextafter", 
+        "nextafterf", 
+        "nextafterfN", 
+        "nextafterfNx", 
+        "nextafterl", 
+        "nextdown", 
+        "nextdownf", 
+        "nextdownfN", 
+        "nextdownfNx", 
+        "nextdownl", 
+        "nexttoward", 
+        "nexttowardf", 
+        "nexttowardl", 
+        "nextup", 
+        "nextupf", 
+        "nextupfN", 
+        "nextupfNx", 
+        "nextupl", 
+        "setpayload", 
+        "setpayloadf", 
+        "setpayloadfN", 
+        "setpayloadfNx", 
+        "setpayloadl", 
+        "setpayloadsig", 
+        "setpayloadsigf", 
+        "setpayloadsigfN", 
+        "setpayloadsigfNx", 
+        "setpayloadsigl", 
+        "signbit"
+    ], 
+    "Dynamic Output": [
+        "asprintf", 
+        "obstack_printf"
+    ], 
+    "Host Address Functions": [
+        "inet_addr", 
+        "inet_aton", 
+        "inet_lnaof", 
+        "inet_makeaddr", 
+        "inet_netof", 
+        "inet_network", 
+        "inet_ntoa", 
+        "inet_ntop", 
+        "inet_pton"
+    ], 
+    "Reading Attributes": [
+        "fstat", 
+        "fstat64", 
+        "lstat", 
+        "lstat64", 
+        "stat", 
+        "stat64"
+    ], 
+    "Streams and I18N": [
+        "fwide"
+    ], 
+    "Making Special Files": [
+        "mknod"
+    ], 
+    "Storage Allocation": [
+        "posix_fallocate", 
+        "posix_fallocate64"
+    ], 
+    "Configuring and compiling": [
+        "grantpt"
+    ], 
+    "Shuffling Bytes": [
+        "strfry"
+    ], 
+    "ISO C Thread Management": [
+        "thrd_create", 
+        "thrd_current", 
+        "thrd_detach", 
+        "thrd_equal", 
+        "thrd_exit", 
+        "thrd_join", 
+        "thrd_sleep", 
+        "thrd_yield"
+    ], 
+    "Identifying the Terminal": [
+        "ctermid"
+    ], 
+    "Protocols Database": [
+        "endprotoent", 
+        "getprotobyname", 
+        "getprotobynumber", 
+        "getprotoent", 
+        "setprotoent"
+    ], 
+    "Structure Measurement": [
+        "offsetof"
+    ], 
+    "High Accuracy Clock": [
+        "ntp_adjtime", 
+        "ntp_gettime"
+    ], 
+    "Control Functions": [
+        "fedisableexcept", 
+        "feenableexcept", 
+        "fegetenv", 
+        "fegetexcept", 
+        "fegetmode", 
+        "feholdexcept", 
+        "fesetenv", 
+        "fesetmode", 
+        "feupdateenv"
+    ], 
+    "File Size": [
+        "ftruncate", 
+        "ftruncate64", 
+        "truncate", 
+        "truncate64"
+    ], 
+    "Matching POSIX Regexps": [
+        "regexec"
+    ], 
+    "Erasing Sensitive Data": [
+        "explicit_bzero"
+    ], 
+    "Passphrase Storage": [
+        "crypt", 
+        "crypt_r"
+    ], 
+    "Signal Messages": [
+        "psignal", 
+        "strsignal"
+    ], 
+    "Terminal Access Functions": [
+        "tcgetpgrp", 
+        "tcgetsid", 
+        "tcsetpgrp"
+    ], 
+    "Inverse Trig Functions": [
+        "acos", 
+        "acosf", 
+        "acosfN", 
+        "acosfNx", 
+        "acosl", 
+        "asin", 
+        "asinf", 
+        "asinfN", 
+        "asinfNx", 
+        "asinl", 
+        "atan", 
+        "atan2", 
+        "atan2f", 
+        "atan2fN", 
+        "atan2fNx", 
+        "atan2l", 
+        "atanf", 
+        "atanfN", 
+        "atanfNx", 
+        "atanl", 
+        "cacos", 
+        "cacosf", 
+        "cacosfN", 
+        "cacosfNx", 
+        "cacosl", 
+        "casin", 
+        "casinf", 
+        "casinfN", 
+        "casinfNx", 
+        "casinl", 
+        "catan", 
+        "catanf", 
+        "catanfN", 
+        "catanfNx", 
+        "catanl"
+    ], 
+    "ISO C Condition Variables": [
+        "cnd_broadcast", 
+        "cnd_destroy", 
+        "cnd_init", 
+        "cnd_signal", 
+        "cnd_timedwait", 
+        "cnd_wait"
+    ], 
+    "Getopt Long Options": [
+        "getopt_long", 
+        "getopt_long_only"
+    ], 
+    "Signaling Yourself": [
+        "gsignal", 
+        "raise"
+    ], 
+    "Parsing a Template String": [
+        "parse_printf_format"
+    ], 
+    "Registering New Conversions": [
+        "register_printf_function"
+    ], 
+    "Floating Point Classes": [
+        "finite", 
+        "finitef", 
+        "finitel", 
+        "fpclassify", 
+        "iscanonical", 
+        "isfinite", 
+        "isinf", 
+        "isinff", 
+        "isinfl", 
+        "isnan", 
+        "isnanf", 
+        "isnanl", 
+        "isnormal", 
+        "issignaling", 
+        "issubnormal", 
+        "iszero"
+    ], 
+    "FIFO Special Files": [
+        "mkfifo"
+    ], 
+    "Pathconf": [
+        "fpathconf", 
+        "pathconf"
+    ], 
+    "Signal Sets": [
+        "sigaddset", 
+        "sigdelset", 
+        "sigemptyset", 
+        "sigfillset", 
+        "sigismember"
+    ], 
+    "Translation with gettext": [
+        "dcgettext", 
+        "dgettext", 
+        "gettext"
+    ], 
+    "Obstack Chunks": [
+        "obstack_chunk_size"
+    ], 
+    "Remainder Functions": [
+        "drem", 
+        "dremf", 
+        "dreml", 
+        "fmod", 
+        "fmodf", 
+        "fmodfN", 
+        "fmodfNx", 
+        "fmodl", 
+        "remainder", 
+        "remainderf", 
+        "remainderfN", 
+        "remainderfNx", 
+        "remainderl"
+    ], 
+    "setlogmask": [
+        "setlogmask"
+    ], 
+    "Descriptors and Streams": [
+        "fdopen", 
+        "fileno", 
+        "fileno_unlocked"
+    ], 
+    "Status bit operations": [
+        "feclearexcept", 
+        "fegetexceptflag", 
+        "feraiseexcept", 
+        "fesetexcept", 
+        "fesetexceptflag", 
+        "fetestexcept", 
+        "fetestexceptflag"
+    ], 
+    "Working with Directory Trees": [
+        "ftw", 
+        "ftw64", 
+        "nftw", 
+        "nftw64"
+    ], 
+    "Tree Search Function": [
+        "tdelete", 
+        "tdestroy", 
+        "tfind", 
+        "tsearch", 
+        "twalk"
+    ], 
+    "System V Number Conversion": [
+        "ecvt", 
+        "ecvt_r", 
+        "fcvt", 
+        "fcvt_r", 
+        "gcvt", 
+        "qecvt", 
+        "qecvt_r", 
+        "qfcvt", 
+        "qfcvt_r", 
+        "qgcvt"
+    ], 
+    "Lookup Netgroup": [
+        "endnetgrent", 
+        "getnetgrent", 
+        "getnetgrent_r", 
+        "setnetgrent"
+    ], 
+    "Sending Data": [
+        "send"
+    ], 
+    "Advanced Signal Handling": [
+        "sigaction"
+    ], 
+    "Networks Database": [
+        "endnetent", 
+        "getnetbyaddr", 
+        "getnetbyname", 
+        "getnetent", 
+        "setnetent"
+    ], 
+    "Status of AIO Operations": [
+        "aio_error", 
+        "aio_error64", 
+        "aio_return", 
+        "aio_return64"
+    ], 
+    "ISO C Thread-local Storage": [
+        "tss_create", 
+        "tss_delete", 
+        "tss_get", 
+        "tss_set"
+    ], 
+    "Logging In and Out": [
+        "login", 
+        "login_tty", 
+        "logout", 
+        "logwtmp"
+    ], 
+    "Symbolic Links": [
+        "canonicalize_file_name", 
+        "readlink", 
+        "realpath", 
+        "symlink"
+    ], 
+    "Cleanups on Exit": [
+        "atexit", 
+        "on_exit"
+    ], 
+    "Setting Permissions": [
+        "chmod", 
+        "fchmod", 
+        "getumask", 
+        "umask"
+    ], 
+    "Manipulating the Database": [
+        "endutent", 
+        "getutent", 
+        "getutent_r", 
+        "getutid", 
+        "getutid_r", 
+        "getutline", 
+        "getutline_r", 
+        "pututline", 
+        "setutent", 
+        "updwtmp", 
+        "utmpname"
+    ], 
+    "Wildcard Matching": [
+        "fnmatch"
+    ], 
+    "Locating gettext catalog": [
+        "bindtextdomain", 
+        "textdomain"
+    ], 
+    "IOCTLs": [
+        "ioctl"
+    ], 
+    "Process Signal Mask": [
+        "sigprocmask"
+    ], 
+    "Socket Option Functions": [
+        "getsockopt", 
+        "setsockopt"
+    ], 
+    "Creating a Pipe": [
+        "pipe"
+    ], 
+    "Directory Entries": [
+        "DTTOIF", 
+        "IFTODT"
+    ], 
+    "Process Identification": [
+        "getpid", 
+        "getppid"
+    ], 
+    "BSD Random": [
+        "initstate", 
+        "initstate_r", 
+        "random", 
+        "random_r", 
+        "setstate", 
+        "setstate_r", 
+        "srandom", 
+        "srandom_r"
+    ], 
+    "Rounding Functions": [
+        "ceil", 
+        "ceilf", 
+        "ceilfN", 
+        "ceilfNx", 
+        "ceill", 
+        "floor", 
+        "floorf", 
+        "floorfN", 
+        "floorfNx", 
+        "floorl", 
+        "fromfp", 
+        "fromfpf", 
+        "fromfpfN", 
+        "fromfpfNx", 
+        "fromfpl", 
+        "fromfpx", 
+        "fromfpxf", 
+        "fromfpxfN", 
+        "fromfpxfNx", 
+        "fromfpxl", 
+        "llrint", 
+        "llrintf", 
+        "llrintfN", 
+        "llrintfNx", 
+        "llrintl", 
+        "llround", 
+        "llroundf", 
+        "llroundfN", 
+        "llroundfNx", 
+        "llroundl", 
+        "lrint", 
+        "lrintf", 
+        "lrintfN", 
+        "lrintfNx", 
+        "lrintl", 
+        "lround", 
+        "lroundf", 
+        "lroundfN", 
+        "lroundfNx", 
+        "lroundl", 
+        "modf", 
+        "modff", 
+        "modffN", 
+        "modffNx", 
+        "modfl", 
+        "nearbyint", 
+        "nearbyintf", 
+        "nearbyintfN", 
+        "nearbyintfNx", 
+        "nearbyintl", 
+        "rint", 
+        "rintf", 
+        "rintfN", 
+        "rintfNx", 
+        "rintl", 
+        "round", 
+        "roundeven", 
+        "roundevenf", 
+        "roundevenfN", 
+        "roundevenfNx", 
+        "roundevenl", 
+        "roundf", 
+        "roundfN", 
+        "roundfNx", 
+        "roundl", 
+        "trunc", 
+        "truncf", 
+        "truncfN", 
+        "truncfNx", 
+        "truncl", 
+        "ufromfp", 
+        "ufromfpf", 
+        "ufromfpfN", 
+        "ufromfpfNx", 
+        "ufromfpl", 
+        "ufromfpx", 
+        "ufromfpxf", 
+        "ufromfpxfN", 
+        "ufromfpxfNx", 
+        "ufromfpxl"
+    ], 
+    "ISO C Mutexes": [
+        "mtx_destroy", 
+        "mtx_init", 
+        "mtx_lock", 
+        "mtx_timedlock", 
+        "mtx_trylock", 
+        "mtx_unlock"
+    ], 
+    "Non-Local Exits and Signals": [
+        "siglongjmp", 
+        "sigsetjmp"
+    ], 
+    "Line Input": [
+        "fgets", 
+        "fgets_unlocked", 
+        "fgetws", 
+        "fgetws_unlocked", 
+        "getdelim", 
+        "getline", 
+        "gets"
+    ], 
+    "Who is Connected": [
+        "getpeername"
+    ], 
+    "Setting the Locale": [
+        "setlocale"
+    ], 
+    "Non-Local Details": [
+        "longjmp", 
+        "setjmp"
+    ], 
+    "Freeing Obstack Objects": [
+        "obstack_free"
+    ], 
+    "File Position Primitive": [
+        "lseek", 
+        "lseek64"
+    ], 
+    "Operations on Complex": [
+        "carg", 
+        "cargf", 
+        "cargfN", 
+        "cargfNx", 
+        "cargl", 
+        "cimag", 
+        "cimagf", 
+        "cimagfN", 
+        "cimagfNx", 
+        "cimagl", 
+        "conj", 
+        "conjf", 
+        "conjfN", 
+        "conjfNx", 
+        "conjl", 
+        "cproj", 
+        "cprojf", 
+        "cprojfN", 
+        "cprojfNx", 
+        "cprojl", 
+        "creal", 
+        "crealf", 
+        "crealfN", 
+        "crealfNx", 
+        "creall"
+    ], 
+    "Creating a Socket": [
+        "socket"
+    ], 
+    "String Length": [
+        "strlen", 
+        "strnlen", 
+        "wcslen", 
+        "wcsnlen"
+    ], 
+    "I/O Primitives": [
+        "pread", 
+        "pread64", 
+        "pwrite", 
+        "pwrite64", 
+        "read", 
+        "write"
+    ], 
+    "System Parameters": [
+        "sysctl"
+    ], 
+    "Actions in the NSS configuration": [
+        "continue", 
+        "merge", 
+        "notfound", 
+        "return", 
+        "success", 
+        "tryagain", 
+        "unavail"
+    ], 
+    "Basic Signal Handling": [
+        "signal", 
+        "ssignal", 
+        "sysv_signal"
+    ], 
+    "Collation Functions": [
+        "strcoll", 
+        "strxfrm", 
+        "wcscoll", 
+        "wcsxfrm"
+    ], 
+    "Sleeping": [
+        "nanosleep", 
+        "sleep"
+    ], 
+    "syslog; vsyslog": [
+        "syslog", 
+        "vsyslog"
+    ], 
+    "Obfuscating Data": [
+        "memfrob"
+    ], 
+    "Streams and Cookies": [
+        "fopencookie"
+    ], 
+    "BSD Signal Handling": [
+        "sigblock", 
+        "siginterrupt", 
+        "sigmask", 
+        "sigpause", 
+        "sigsetmask"
+    ], 
+    "XPG Functions": [
+        "endutxent", 
+        "getutmp", 
+        "getutmpx", 
+        "getutxent", 
+        "getutxid", 
+        "getutxline", 
+        "pututxline", 
+        "setutxent", 
+        "utmpxname"
+    ], 
+    "Array Sort Function": [
+        "qsort"
+    ], 
+    "Error Messages": [
+        "err", 
+        "error", 
+        "error_at_line", 
+        "errx", 
+        "perror", 
+        "strerror", 
+        "strerror_r", 
+        "verr", 
+        "verrx", 
+        "vwarn", 
+        "vwarnx", 
+        "warn", 
+        "warnx"
+    ], 
+    "closelog": [
+        "closelog"
+    ], 
+    "Platform Type": [
+        "uname"
+    ], 
+    "Scatter-Gather": [
+        "preadv", 
+        "preadv2", 
+        "preadv64", 
+        "preadv64v2", 
+        "pwritev", 
+        "pwritev2", 
+        "pwritev64", 
+        "pwritev64v2", 
+        "readv", 
+        "writev"
+    ], 
+    "Trig Functions": [
+        "ccos", 
+        "ccosf", 
+        "ccosfN", 
+        "ccosfNx", 
+        "ccosl", 
+        "cos", 
+        "cosf", 
+        "cosfN", 
+        "cosfNx", 
+        "cosl", 
+        "csin", 
+        "csinf", 
+        "csinfN", 
+        "csinfNx", 
+        "csinl", 
+        "ctan", 
+        "ctanf", 
+        "ctanfN", 
+        "ctanfNx", 
+        "ctanl", 
+        "sin", 
+        "sincos", 
+        "sincosf", 
+        "sincosfN", 
+        "sincosfNx", 
+        "sincosl", 
+        "sinf", 
+        "sinfN", 
+        "sinfNx", 
+        "sinl", 
+        "tan", 
+        "tanf", 
+        "tanfN", 
+        "tanfNx", 
+        "tanl"
+    ], 
+    "Creating a Process": [
+        "fork", 
+        "vfork"
+    ], 
+    "fstab": [
+        "endfsent", 
+        "getfsent", 
+        "getfsfile", 
+        "getfsspec", 
+        "setfsent"
+    ], 
+    "Process Completion Status": [
+        "WCOREDUMP", 
+        "WEXITSTATUS", 
+        "WIFEXITED", 
+        "WIFSIGNALED", 
+        "WIFSTOPPED", 
+        "WSTOPSIG", 
+        "WTERMSIG"
+    ], 
+    "Classification of Characters": [
+        "isalnum", 
+        "isalpha", 
+        "isascii", 
+        "isblank", 
+        "iscntrl", 
+        "isdigit", 
+        "isgraph", 
+        "islower", 
+        "isprint", 
+        "ispunct", 
+        "isspace", 
+        "isupper", 
+        "isxdigit"
+    ], 
+    "Predefined Printf Handlers": [
+        "printf_size", 
+        "printf_size_info"
+    ], 
+    "Opening and Closing Files": [
+        "close", 
+        "creat", 
+        "creat64", 
+        "open", 
+        "open64"
+    ], 
+    "Lookup Group": [
+        "getgrgid", 
+        "getgrgid_r", 
+        "getgrnam", 
+        "getgrnam_r"
+    ], 
+    "Page Lock Functions": [
+        "mlock", 
+        "mlock2", 
+        "mlockall", 
+        "munlock", 
+        "munlockall"
+    ], 
+    "Broken-down Time": [
+        "gmtime", 
+        "gmtime_r", 
+        "localtime", 
+        "localtime_r", 
+        "mktime", 
+        "timegm", 
+        "timelocal"
+    ], 
+    "Program Arguments": [
+        "main"
+    ], 
+    "Integer Division": [
+        "div", 
+        "imaxdiv", 
+        "ldiv", 
+        "lldiv"
+    ], 
+    "Connecting": [
+        "connect"
+    ], 
+    "Pipe to a Subprocess": [
+        "pclose", 
+        "popen"
+    ], 
+    "Calling Glob": [
+        "glob", 
+        "glob64"
+    ], 
+    "Streams and Threads": [
+        "__fsetlocking", 
+        "flockfile", 
+        "ftrylockfile", 
+        "funlockfile"
+    ], 
+    "Receiving Datagrams": [
+        "recvfrom"
+    ], 
+    "SVID Random": [
+        "drand48", 
+        "drand48_r", 
+        "erand48", 
+        "erand48_r", 
+        "jrand48", 
+        "jrand48_r", 
+        "lcong48", 
+        "lcong48_r", 
+        "lrand48", 
+        "lrand48_r", 
+        "mrand48", 
+        "mrand48_r", 
+        "nrand48", 
+        "nrand48_r", 
+        "seed48", 
+        "seed48_r", 
+        "srand48", 
+        "srand48_r"
+    ], 
+    "Normalization Functions": [
+        "frexp", 
+        "frexpf", 
+        "frexpfN", 
+        "frexpfNx", 
+        "frexpl", 
+        "ldexp", 
+        "ldexpf", 
+        "ldexpfN", 
+        "ldexpfNx", 
+        "ldexpl", 
+        "scalb", 
+        "scalbf", 
+        "scalbl", 
+        "scalbln", 
+        "scalblnf", 
+        "scalblnfN", 
+        "scalblnfNx", 
+        "scalblnl", 
+        "scalbn", 
+        "scalbnf", 
+        "scalbnfN", 
+        "scalbnfNx", 
+        "scalbnl", 
+        "significand", 
+        "significandf", 
+        "significandl"
+    ], 
+    "Absolute Value": [
+        "abs", 
+        "cabs", 
+        "cabsf", 
+        "cabsfN", 
+        "cabsfNx", 
+        "cabsl", 
+        "fabs", 
+        "fabsf", 
+        "fabsfN", 
+        "fabsfNx", 
+        "fabsl", 
+        "imaxabs", 
+        "labs", 
+        "llabs"
+    ], 
+    "Controlling Buffering": [
+        "__fbufsize", 
+        "__flbf", 
+        "__fpending", 
+        "setbuf", 
+        "setbuffer", 
+        "setlinebuf", 
+        "setvbuf"
+    ], 
+    "POSIX Regexp Compilation": [
+        "regcomp"
+    ], 
+    "Non-reentrant Character Conversion": [
+        "mblen", 
+        "mbtowc", 
+        "wctomb"
+    ], 
+    "Argz Functions": [
+        "argz_add", 
+        "argz_add_sep", 
+        "argz_append", 
+        "argz_count", 
+        "argz_create", 
+        "argz_create_sep", 
+        "argz_delete", 
+        "argz_extract", 
+        "argz_insert", 
+        "argz_next", 
+        "argz_replace", 
+        "argz_stringify"
+    ], 
+    "Generic Conversion Interface": [
+        "iconv", 
+        "iconv_close", 
+        "iconv_open"
+    ], 
+    "Sigsuspend": [
+        "sigsuspend"
+    ], 
+    "Processor Time": [
+        "times"
+    ], 
+    "Services Database": [
+        "endservent", 
+        "getservbyname", 
+        "getservbyport", 
+        "getservent", 
+        "setservent"
+    ], 
+    "Line Control": [
+        "tcdrain", 
+        "tcflow", 
+        "tcflush", 
+        "tcsendbreak"
+    ], 
+    "Synchronizing AIO Operations": [
+        "aio_fsync", 
+        "aio_fsync64", 
+        "aio_suspend", 
+        "aio_suspend64"
+    ], 
+    "Pseudo-Terminal Pairs": [
+        "forkpty", 
+        "openpty"
+    ], 
+    "Resizing the Data Segment": [
+        "*sbrk", 
+        "brk"
+    ], 
+    "Aborting a Program": [
+        "abort"
+    ], 
+    "Listening": [
+        "listen"
+    ], 
+    "Special Functions": [
+        "erf", 
+        "erfc", 
+        "erfcf", 
+        "erfcfN", 
+        "erfcfNx", 
+        "erfcl", 
+        "erff", 
+        "erffN", 
+        "erffNx", 
+        "erfl", 
+        "gamma", 
+        "gammaf", 
+        "gammal", 
+        "j0", 
+        "j0f", 
+        "j0fN", 
+        "j0fNx", 
+        "j0l", 
+        "j1", 
+        "j1f", 
+        "j1fN", 
+        "j1fNx", 
+        "j1l", 
+        "jn", 
+        "jnf", 
+        "jnfN", 
+        "jnfNx", 
+        "jnl", 
+        "lgamma", 
+        "lgammaf", 
+        "lgammafN", 
+        "lgammafNx", 
+        "lgammafNx_r", 
+        "lgammafN_r", 
+        "lgammaf_r", 
+        "lgammal", 
+        "lgammal_r", 
+        "lgamma_r", 
+        "tgamma", 
+        "tgammaf", 
+        "tgammafN", 
+        "tgammafNx", 
+        "tgammal", 
+        "y0", 
+        "y0f", 
+        "y0fN", 
+        "y0fNx", 
+        "y0l", 
+        "y1", 
+        "y1f", 
+        "y1fN", 
+        "y1fNx", 
+        "y1l", 
+        "yn", 
+        "ynf", 
+        "ynfN", 
+        "ynfNx", 
+        "ynl"
+    ], 
+    "Processor Resources": [
+        "getloadavg", 
+        "get_nprocs", 
+        "get_nprocs_conf"
+    ], 
+    "Status of an Obstack": [
+        "obstack_base", 
+        "obstack_next_free", 
+        "obstack_object_size"
+    ], 
+    "Heap Consistency Checking": [
+        "mcheck", 
+        "mprobe"
+    ], 
+    "Variable Size Automatic": [
+        "alloca"
+    ], 
+    "String/Array Comparison": [
+        "bcmp", 
+        "memcmp", 
+        "strcasecmp", 
+        "strcmp", 
+        "strncasecmp", 
+        "strncmp", 
+        "strverscmp", 
+        "wcscasecmp", 
+        "wcscmp", 
+        "wcsncasecmp", 
+        "wcsncmp", 
+        "wmemcmp"
+    ], 
+    "Hash Search Function": [
+        "hcreate", 
+        "hcreate_r", 
+        "hdestroy", 
+        "hdestroy_r", 
+        "hsearch", 
+        "hsearch_r"
+    ], 
+    "Process Completion": [
+        "wait", 
+        "wait4", 
+        "waitpid"
+    ], 
+    "getpass": [
+        "getpass"
+    ], 
+    "Setting Address": [
+        "bind"
+    ], 
+    "Mount-Unmount-Remount": [
+        "mount", 
+        "umount", 
+        "umount2"
+    ], 
+    "Interface Naming": [
+        "if_freenameindex", 
+        "if_indextoname", 
+        "if_nameindex", 
+        "if_nametoindex"
+    ], 
+    "FP Comparison Functions": [
+        "iseqsig", 
+        "isgreater", 
+        "isgreaterequal", 
+        "isless", 
+        "islessequal", 
+        "islessgreater", 
+        "isunordered", 
+        "totalorder", 
+        "totalorderf", 
+        "totalorderfN", 
+        "totalorderfNx", 
+        "totalorderl", 
+        "totalordermag", 
+        "totalordermagf", 
+        "totalordermagfN", 
+        "totalordermagfNx", 
+        "totalordermagl"
+    ], 
+    "Variable Arguments Output": [
+        "obstack_vprintf", 
+        "vasprintf", 
+        "vfprintf", 
+        "vfwprintf", 
+        "vprintf", 
+        "vsnprintf", 
+        "vsprintf", 
+        "vswprintf", 
+        "vwprintf"
+    ], 
+    "Interrupted Primitives": [
+        "TEMP_FAILURE_RETRY"
+    ], 
+    "Mode Functions": [
+        "tcgetattr", 
+        "tcsetattr"
+    ], 
+    "Host Identification": [
+        "getdomainnname", 
+        "gethostid", 
+        "gethostname", 
+        "setdomainname", 
+        "sethostid", 
+        "sethostname"
+    ], 
+    "Auxiliary Vector": [
+        "getauxval"
+    ], 
+    "Basic Allocation": [
+        "malloc"
+    ], 
+    "Local Namespace Details": [
+        "SUN_LEN"
+    ], 
+    "Is It a Terminal": [
+        "isatty", 
+        "ttyname", 
+        "ttyname_r"
+    ], 
+    "Query Memory Parameters": [
+        "getpagesize", 
+        "get_avphys_pages", 
+        "get_phys_pages"
+    ], 
+    "Misc FP Arithmetic": [
+        "daddl", 
+        "ddivl", 
+        "dmull", 
+        "dsubl", 
+        "fadd", 
+        "faddl", 
+        "fdim", 
+        "fdimf", 
+        "fdimfN", 
+        "fdimfNx", 
+        "fdiml", 
+        "fdiv", 
+        "fdivl", 
+        "fma", 
+        "fMaddfN", 
+        "fMaddfNx", 
+        "fmaf", 
+        "fmafN", 
+        "fmafNx", 
+        "fmal", 
+        "fmax", 
+        "fmaxf", 
+        "fmaxfN", 
+        "fmaxfNx", 
+        "fmaxl", 
+        "fmaxmag", 
+        "fmaxmagf", 
+        "fmaxmagfN", 
+        "fmaxmagfNx", 
+        "fmaxmagl", 
+        "fMdivfN", 
+        "fMdivfNx", 
+        "fmin", 
+        "fminf", 
+        "fminfN", 
+        "fminfNx", 
+        "fminl", 
+        "fminmag", 
+        "fminmagf", 
+        "fminmagfN", 
+        "fminmagfNx", 
+        "fminmagl", 
+        "fMmulfN", 
+        "fMmulfNx", 
+        "fMsubfN", 
+        "fMsubfNx", 
+        "fmul", 
+        "fmull", 
+        "fMxaddfN", 
+        "fMxaddfNx", 
+        "fMxdivfN", 
+        "fMxdivfNx", 
+        "fMxmulfN", 
+        "fMxmulfNx", 
+        "fMxsubfN", 
+        "fMxsubfNx", 
+        "fsub", 
+        "fsubl"
+    ], 
+    "Scanning Directory Content": [
+        "alphasort", 
+        "alphasort64", 
+        "scandir", 
+        "scandir64", 
+        "versionsort", 
+        "versionsort64"
+    ], 
+    "Non-reentrant String Conversion": [
+        "mbstowcs", 
+        "wcstombs"
+    ], 
+    "Freeing after Malloc": [
+        "free"
+    ], 
+    "File Owner": [
+        "chown", 
+        "fchown"
+    ], 
+    "How Unread": [
+        "ungetc", 
+        "ungetwc"
+    ], 
+    "More Flags for Globbing": [
+        "globfree", 
+        "globfree64"
+    ], 
+    "Memory Protection": [
+        "mprotect", 
+        "pkey_alloc", 
+        "pkey_free", 
+        "pkey_get", 
+        "pkey_mprotect", 
+        "pkey_set"
+    ], 
+    "Parsing of Integers": [
+        "atoi", 
+        "atol", 
+        "atoll", 
+        "strtoimax", 
+        "strtol", 
+        "strtoll", 
+        "strtoq", 
+        "strtoul", 
+        "strtoull", 
+        "strtoumax", 
+        "strtouq", 
+        "wcstoimax", 
+        "wcstol", 
+        "wcstoll", 
+        "wcstoq", 
+        "wcstoul", 
+        "wcstoull", 
+        "wcstoumax", 
+        "wcstouq"
+    ], 
+    "Control Operations": [
+        "fcntl"
+    ], 
+    "Allocating Cleared Space": [
+        "calloc"
+    ], 
+    "Variable Arguments Input": [
+        "vfscanf", 
+        "vfwscanf", 
+        "vscanf", 
+        "vsscanf", 
+        "vswscanf", 
+        "vwscanf"
+    ], 
+    "RISC-V": [
+        "__riscv_flush_icache"
+    ], 
+    "Configuration of AIO": [
+        "aio_init"
+    ], 
+    "Default Thread Attributes": [
+        "pthread_getattr_default_np", 
+        "pthread_setattr_default_np"
+    ], 
+    "Converting a Character": [
+        "btowc", 
+        "mbrlen", 
+        "mbrtowc", 
+        "wcrtomb", 
+        "wctob"
+    ], 
+    "Byte Order": [
+        "htonl", 
+        "htons", 
+        "ntohl", 
+        "ntohs"
+    ], 
+    "Termination Internals": [
+        "_exit", 
+        "_Exit"
+    ], 
+    "Case Conversion": [
+        "_tolower", 
+        "_toupper", 
+        "toascii", 
+        "tolower", 
+        "toupper"
+    ], 
+    "Renaming Files": [
+        "rename"
+    ], 
+    "Netgroup Membership": [
+        "innetgr"
+    ], 
+    "Changing Block Size": [
+        "realloc", 
+        "reallocarray"
+    ], 
+    "Setting User ID": [
+        "seteuid", 
+        "setreuid", 
+        "setuid"
+    ], 
+    "CPU Time": [
+        "clock"
+    ], 
+    "Portable Positioning": [
+        "fgetpos", 
+        "fgetpos64", 
+        "fsetpos", 
+        "fsetpos64"
+    ], 
+    "Printing Formatted Messages": [
+        "fmtmsg"
+    ], 
+    "Thread-specific Data": [
+        "*pthread_getspecific", 
+        "pthread_key_create", 
+        "pthread_key_delete", 
+        "pthread_setspecific"
+    ], 
+    "Reading/Closing Directory": [
+        "closedir", 
+        "readdir", 
+        "readdir64", 
+        "readdir64_r", 
+        "readdir_r"
+    ], 
+    "Basic Scheduling Functions": [
+        "sched_getparam", 
+        "sched_getscheduler", 
+        "sched_get_priority_max", 
+        "sched_get_priority_min", 
+        "sched_rr_get_interval", 
+        "sched_setparam", 
+        "sched_setscheduler", 
+        "sched_yield"
+    ], 
+    "Wide Character Case Conversion": [
+        "towctrans", 
+        "towlower", 
+        "towupper", 
+        "wctrans"
+    ], 
+    "Low-Level Time String Parsing": [
+        "strptime"
+    ], 
+    "Hyperbolic Functions": [
+        "acosh", 
+        "acoshf", 
+        "acoshfN", 
+        "acoshfNx", 
+        "acoshl", 
+        "asinh", 
+        "asinhf", 
+        "asinhfN", 
+        "asinhfNx", 
+        "asinhl", 
+        "atanh", 
+        "atanhf", 
+        "atanhfN", 
+        "atanhfNx", 
+        "atanhl", 
+        "cacosh", 
+        "cacoshf", 
+        "cacoshfN", 
+        "cacoshfNx", 
+        "cacoshl", 
+        "casinh", 
+        "casinhf", 
+        "casinhfN", 
+        "casinhfNx", 
+        "casinhl", 
+        "catanh", 
+        "catanhf", 
+        "catanhfN", 
+        "catanhfNx", 
+        "catanhl", 
+        "ccosh", 
+        "ccoshf", 
+        "ccoshfN", 
+        "ccoshfNx", 
+        "ccoshl", 
+        "cosh", 
+        "coshf", 
+        "coshfN", 
+        "coshfNx", 
+        "coshl", 
+        "csinh", 
+        "csinhf", 
+        "csinhfN", 
+        "csinhfNx", 
+        "csinhl", 
+        "ctanh", 
+        "ctanhf", 
+        "ctanhfN", 
+        "ctanhfNx", 
+        "ctanhl", 
+        "sinh", 
+        "sinhf", 
+        "sinhfN", 
+        "sinhfNx", 
+        "sinhl", 
+        "tanh", 
+        "tanhf", 
+        "tanhfN", 
+        "tanhfNx", 
+        "tanhl"
+    ], 
+    "Checking for Pending Signals": [
+        "sigpending"
+    ], 
+    "Testing File Access": [
+        "access"
+    ], 
+    "Argp Help": [
+        "argp_help"
+    ], 
+    "Parsing of Floats": [
+        "atof", 
+        "strtod", 
+        "strtof", 
+        "strtofN", 
+        "strtofNx", 
+        "strtold", 
+        "wcstod", 
+        "wcstof", 
+        "wcstofN", 
+        "wcstofNx", 
+        "wcstold"
+    ], 
+    "Character Input": [
+        "fgetc", 
+        "fgetc_unlocked", 
+        "fgetwc", 
+        "fgetwc_unlocked", 
+        "getc", 
+        "getchar", 
+        "getchar_unlocked", 
+        "getc_unlocked", 
+        "getw", 
+        "getwc", 
+        "getwchar", 
+        "getwchar_unlocked", 
+        "getwc_unlocked"
+    ], 
+    "Signal Stack": [
+        "sigaltstack", 
+        "sigstack"
+    ], 
+    "Advanced gettext functions": [
+        "dcngettext", 
+        "dngettext", 
+        "ngettext"
+    ], 
+    "Semaphores": [
+        "*sem_open", 
+        "semctl", 
+        "semget", 
+        "semop", 
+        "semtimedop", 
+        "sem_close", 
+        "sem_destroy", 
+        "sem_getvalue", 
+        "sem_init", 
+        "sem_post", 
+        "sem_timedwait", 
+        "sem_trywait", 
+        "sem_unlink", 
+        "sem_wait"
+    ], 
+    "Consistency Checking": [
+        "assert", 
+        "assert_perror"
+    ], 
+    "Envz Functions": [
+        "envz_add", 
+        "envz_entry", 
+        "envz_get", 
+        "envz_merge", 
+        "envz_remove", 
+        "envz_strip"
+    ], 
+    "Formatted Output Functions": [
+        "fprintf", 
+        "fwprintf", 
+        "printf", 
+        "snprintf", 
+        "sprintf", 
+        "swprintf", 
+        "wprintf"
+    ], 
+    "Noncanonical Input": [
+        "cfmakeraw"
+    ], 
+    "Formatting Calendar Time": [
+        "asctime", 
+        "asctime_r", 
+        "ctime", 
+        "ctime_r", 
+        "strftime", 
+        "wcsftime"
+    ], 
+    "Malloc Tunable Parameters": [
+        "mallopt"
+    ], 
+    "Encode Binary Data": [
+        "a64l", 
+        "l64a"
+    ], 
+    "High-Resolution Calendar": [
+        "adjtime", 
+        "adjtimex", 
+        "gettimeofday", 
+        "settimeofday"
+    ], 
+    "Asynchronous Reads/Writes": [
+        "aio_read", 
+        "aio_read64", 
+        "aio_write", 
+        "aio_write64", 
+        "lio_listio", 
+        "lio_listio64"
+    ], 
+    "Formatting Numbers": [
+        "strfmon"
+    ], 
+    "The Elegant and Fast Way": [
+        "nl_langinfo"
+    ], 
+    "String Parameters": [
+        "confstr"
+    ], 
+    "Environment Access": [
+        "clearenv", 
+        "getenv", 
+        "putenv", 
+        "secure_getenv", 
+        "setenv", 
+        "unsetenv"
+    ], 
+    "Setting an Alarm": [
+        "alarm", 
+        "getitimer", 
+        "setitimer"
+    ], 
+    "Charset conversion in gettext": [
+        "bind_textdomain_codeset"
+    ], 
+    "Formatted Input Functions": [
+        "fscanf", 
+        "fwscanf", 
+        "scanf", 
+        "sscanf", 
+        "swscanf", 
+        "wscanf"
+    ], 
+    "Writing a User Entry": [
+        "putpwent"
+    ], 
+    "Suboptions": [
+        "getsubopt"
+    ], 
+    "Duplicating Descriptors": [
+        "dup", 
+        "dup2"
+    ], 
+    "openlog": [
+        "openlog"
+    ], 
+    "Error Recovery": [
+        "clearerr", 
+        "clearerr_unlocked"
+    ], 
+    "Argp Helper Functions": [
+        "argp_error", 
+        "argp_failure", 
+        "argp_state_help", 
+        "argp_usage"
+    ], 
+    "The catgets Functions": [
+        "catclose", 
+        "catgets", 
+        "catopen"
+    ], 
+    "Synchronizing I/O": [
+        "fdatasync", 
+        "fsync", 
+        "sync"
+    ], 
+    "CPU Affinity": [
+        "CPU_CLR", 
+        "CPU_ISSET", 
+        "CPU_SET", 
+        "CPU_ZERO", 
+        "sched_getaffinity", 
+        "sched_setaffinity"
+    ], 
+    "Simple Calendar Time": [
+        "stime", 
+        "time"
+    ], 
+    "Working Directory": [
+        "chdir", 
+        "fchdir", 
+        "getcwd", 
+        "getwd", 
+        "get_current_dir_name"
+    ], 
+    "Resource Usage": [
+        "getrusage", 
+        "vtimes"
+    ], 
+    "Memory-mapped I/O": [
+        "madvise", 
+        "memfd_create", 
+        "mmap", 
+        "mmap64", 
+        "mremap", 
+        "msync", 
+        "munmap", 
+        "shm_open", 
+        "shm_unlink"
+    ], 
+    "Call Once": [
+        "call_once"
+    ], 
+    "Sending Datagrams": [
+        "sendto"
+    ], 
+    "Limits on Resources": [
+        "getrlimit", 
+        "getrlimit64", 
+        "setrlimit", 
+        "setrlimit64", 
+        "ulimit", 
+        "vlimit"
+    ], 
+    "Receiving Data": [
+        "recv"
+    ], 
+    "BSD Wait Functions": [
+        "wait3"
+    ], 
+    "Copying File Data": [
+        "copy_file_range"
+    ], 
+    "File Positioning": [
+        "fseek", 
+        "fseeko", 
+        "fseeko64", 
+        "ftell", 
+        "ftello", 
+        "ftello64", 
+        "rewind"
+    ], 
+    "Extra Fast Growing": [
+        "obstack_1grow_fast", 
+        "obstack_blank_fast", 
+        "obstack_int_grow_fast", 
+        "obstack_ptr_grow_fast", 
+        "obstack_room"
+    ], 
+    "Array Search Function": [
+        "bsearch", 
+        "lfind", 
+        "lsearch"
+    ], 
+    "Argument Macros": [
+        "__va_copy", 
+        "va_arg", 
+        "va_copy", 
+        "va_end", 
+        "va_start"
+    ], 
+    "Closing Streams": [
+        "fclose", 
+        "fcloseall"
+    ], 
+    "Scanning All Groups": [
+        "endgrent", 
+        "fgetgrent", 
+        "fgetgrent_r", 
+        "getgrent", 
+        "getgrent_r", 
+        "setgrent"
+    ], 
+    "System Calls": [
+        "syscall"
+    ]
+}
