@@ -1,0 +1,59 @@
+command
+line:
+
+/home/hong/dynDebloating/bin/ptxed
+--pevent:vdso-x64 sysroot/vdso/vdso-x64.so
+--cpu 6/158/9
+--pevent:time-shift 31
+--pevent:time-mult 499879806
+--pevent:time-zero 18446744051762116237
+--cpuid-0x15.ebx 358
+--cpuid-0x15.eax 2
+--nom-freq 43
+--pevent:sample-type 0x10086
+--mtc-freq 0x3
+--pevent:secondary perf.data-sideband-cpu0.pevent
+--pevent:secondary perf.data-sideband-cpu2.pevent
+--pevent:secondary perf.data-sideband-cpu3.pevent
+--pevent:secondary perf.data-sideband-cpu4.pevent
+--pevent:secondary perf.data-sideband-cpu5.pevent
+--pevent:primary perf.data-sideband-cpu7.pevent
+--event:tick
+--no-inst
+--pt perf.data-aux-idx7.bin
+
+1. main() inside ptxed.c
+
+  --pevent:vdso-x64: 
+
+		record the path to vdso_x64
+
+	--cpu:
+
+		parse CPU settings
+
+	--pevent:primary:
+
+		accept sideband file
+		pxted_sb_pevent:
+			parse file name (to obtain optional begin and end)
+			pt_sb_alloc_pevent_decoder:
+				pt_sb_pevent_init:
+					load the file content into memory (with optional begin and end)
+					initalize filename, sysroot, vdso_x64 and etc
+				pt_sb_alloc_decoder: 
+
+	--pevent:secondary:
+
+		similar to primary
+
+	--no-inst:
+
+		do not print instruction
+
+	--pt pt_data_file
+		
+		load_pt: load the whole pt_data_file into memory, and record the memory start & end into pt_config
+		alloc_decoder: 
+			pt_blk_alloc_decoder
+			pt_blk_set_image
