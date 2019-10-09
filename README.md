@@ -8,4 +8,4 @@ Instead of only supporting given test cases, RAZOR takes sev-
 eral control-flow heuristics to infer complementary code that
 are necessary to support user-expected functionalities.
 
-# Source code and data sets will be released soon.
+# Data sets will be released soon.
