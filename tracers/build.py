@@ -78,6 +78,15 @@ def build_pin():
     os.chdir(pwd)
     
 def build_pt():
+    # create build, bin
+    if not os.path.exists('./build'):
+        cmd = 'mkdir ./build'
+        execute(cmd)
+    
+    if not os.path.exists('./bin'):
+        cmd = 'mkdir ./bin'
+        execute(cmd)
+
     # download libipt from the official repo
     if not os.path.exists('./pt'):
         #cmd = "git clone git@github.com:01org/pt.git"
