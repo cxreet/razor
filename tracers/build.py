@@ -67,7 +67,6 @@ def build_pin():
     if not os.path.exists('./bin'):
         cmd = 'mkdir ./bin'
         execute(cmd)
-<<<<<<< HEAD
 
     os.chdir(pin_src)
     cmd = 'make PIN_ROOT=../../../pin'
