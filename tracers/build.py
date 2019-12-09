@@ -13,16 +13,16 @@ def execute(cmd):
 def build_dynamorio():
     # download dynamorio relsease version 7.0.0 if it doesn't exist
     if not os.path.exists('./dynamorio'):
-        cmd = 'wget https://github.com/DynamoRIO/dynamorio/releases/download/release_7_0_0_rc1/DynamoRIO-Linux-7.0.0-RC1.tar.gz'
+        cmd = 'wget https://github.com/DynamoRIO/dynamorio/releases/download/release_7.1.0/DynamoRIO-Linux-7.1.0-1.tar.gz'
         execute(cmd)
 
-        cmd = 'tar -xzvf DynamoRIO-Linux-7.0.0-RC1.tar.gz'
+        cmd = 'tar -xzvf DynamoRIO-Linux-7.1.0-1.tar.gz'
         execute(cmd)
 
-        cmd = 'mv DynamoRIO-Linux-7.0.0-RC1 dynamorio'
+        cmd = 'mv DynamoRIO-Linux-7.1.0-1 dynamorio'
         execute(cmd)
 
-        cmd = 'rm DynamoRIO-Linux-7.0.0-RC1.tar.gz'
+        cmd = 'rm DynamoRIO-Linux-7.1.0-1.tar.gz'
         execute(cmd)
 
     # create build, bin
@@ -67,17 +67,27 @@ def build_pin():
     if not os.path.exists('./bin'):
         cmd = 'mkdir ./bin'
         execute(cmd)
+<<<<<<< HEAD
+
+    os.chdir(pin_src)
+    cmd = 'make PIN_ROOT=../../../pin'
+    execute(cmd)
+    cmd = 'mv obj-intel64/*.so ../../../bin/' 
+=======
     
     os.chdir(pin_src)
     cmd = 'make PIN_ROOT=../../pin'
     execute(cmd)
     cmd = 'mv obj-intel64/*.so ../../bin/' 
+>>>>>>> 48fc9211ef26c0f49a3d91cef129365d0466e048
     execute(cmd)
     cmd = 'rm -rf obj-intel64'
     execute(cmd)
     os.chdir(pwd)
     
 def build_pt():
+<<<<<<< HEAD
+=======
     # create build, bin
     if not os.path.exists('./build'):
         cmd = 'mkdir ./build'
@@ -87,6 +97,7 @@ def build_pt():
         cmd = 'mkdir ./bin'
         execute(cmd)
 
+>>>>>>> 48fc9211ef26c0f49a3d91cef129365d0466e048
     # download libipt from the official repo
     if not os.path.exists('./pt'):
         #cmd = "git clone git@github.com:01org/pt.git"
@@ -149,6 +160,10 @@ def build_pt():
     os.chdir(pwd)
 
 def main():
+<<<<<<< HEAD
+    print (len(sys.argv))
+=======
+>>>>>>> 48fc9211ef26c0f49a3d91cef129365d0466e048
     if len(sys.argv) == 1:
         build_dynamorio()
         build_pin()
