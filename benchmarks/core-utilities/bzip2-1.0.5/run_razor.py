@@ -41,7 +41,7 @@ def debloat(logs_dir, prog_name):
     execute("""python ../../../stitcher/src/merge_bin.py %s.orig %s.s""" % (prog_name, prog_name))
 
 def extend_debloat(prog_name):
-    execute("""python ../../../stitcher/src/heuristic/disasm.py ./%s.orig ./%s.org.asm """ % (prog_name, prog_name))
+    execute("""python ../../../stitcher/src/heuristic/disasm.py ./%s.orig ./%s.orig.asm """ % (prog_name, prog_name))
     execute("""python ../../../stitcher/src/heuristic/find_more_paths.py ./%s.orig.asm ./%s-trace.log ./%s-extended.log""" % (prog_name, prog_name, prog_name))
     execute("""python ../../../stitcher/src/instr_dumper.py ./%s-extended.log ./%s.orig ./instr.s""" % (prog_name, prog_name))
     execute("""python ../../../stitcher/src/find_symbols.py ./%s.orig ./instr.s > ./callbacks.txt""" % (prog_name))
@@ -58,6 +58,12 @@ def clean():
             continue
         
         if fname == 'test' or fname == 'train':
+            continue
+
+        if fname == "bzip2.orig":
+            continue
+
+        if fname == "README.md":
             continue
 
         execute('rm -rf ./' + fname)
