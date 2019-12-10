@@ -1,0 +1,10 @@
+__cxa_atexit,1
+_ZNSolsEPFRSoS_E,2
+qsort,4
+_obstack_begin,4,5
+bsearch,5
+signal,2
+__libc_start_main,1,4,5,6
+tputs,3
+vidputs,2
+vid_puts,4
