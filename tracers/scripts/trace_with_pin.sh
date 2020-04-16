@@ -1,12 +1,9 @@
 #!/bin/bash
 
-bin_cmd="/bin/ls /var"
+set -ex
 
-set -e
-
-cur_dir=$(pwd)
+bin_cmd=$@
+cur_dir=$(dirname "$0")
 root_dir=$(readlink -m $cur_dir/../)
 
-$root_dir/pin/pin -t $root_dir/bin/trace.so -o abc -- $bin_cmd
-
-echo "you can find the trace in abc-*"
+$root_dir/pin/pin -t $root_dir/bin/trace.so -o pin_trace -- $bin_cmd

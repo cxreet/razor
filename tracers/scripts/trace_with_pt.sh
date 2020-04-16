@@ -1,28 +1,28 @@
 #!/bin/bash
 
-set -e 
-set -x
-
 ################################################################################
-#
-#        you have to configure the following before tracing
 #
 #        make sure you know the expected loading address of the binary
 #
 #			   (as root) echo -1 > /proc/sys/kernel/perf_event_paranoid
 #
-
-bin_cmd="/bin/ls /var"
-
-
 #################################################################################
 
-set -e
+set -ex
 
-cur_dir=$(pwd)
+# clean up
+#echo -n "" > /tmp/123
+echo -n "" > pt_trace_log
+#echo -n "" > trace_dump
+rm -f perf.data-aux-idx*.bin 
+rm -f perf.data-sideband-cpu*.pevent
+rm -f perf.data*
+rm -f pt_trace
+rm -rf sysroot
+
+bin_cmd=$@
+cur_dir=$(dirname "$0")
 root_dir=$(readlink -m $cur_dir/../)
-
-bash ./cleanup.sh
 
 # generate trace for /bin/ls
 #
@@ -44,7 +44,6 @@ bash ./cleanup.sh
 #echo "recoring" >> /tmp/123
 #/usr/bin/time -p -a -o /tmp/123 
 perf record -m 512,10000 -e intel_pt/noretcomp/u  --switch-events -T -- $bin_cmd
-#echo "" >> /tmp/123
 
 # extract the raw PT trace
 #echo "extract aux" >> /tmp/123
@@ -76,10 +75,15 @@ $root_dir/pt/script/perf-copy-mapped-files.bash -o sysroot
 for aux_data in $(ls perf.data-aux-idx*.bin); do
 	a=${aux_data:17}
 	b=${a:0:(${#a}-4)}
-	$root_dir/bin/ptxed --pevent:vdso-x64 sysroot/vdso/vdso-x64.so $($root_dir/pt/script/perf-get-opts.bash -m perf.data-sideband-cpu$b.pevent) --event:tick --decode-to-debloat --no-inst --pt $aux_data >> pt_trace_log
+	$root_dir/bin/ptxed --pevent:vdso-x64 sysroot/vdso/vdso-x64.so $($root_dir/pt/script/perf-get-opts.bash -m perf.data-sideband-cpu$b.pevent) --event:tick --decode-to-debloat --no-inst --pt $aux_data >> pt_trace
 done
 #echo "" >> /tmp/123
 
-#cat /tmp/123
-
-echo "you can find the trace in pt_trace_log"
+# clean up
+#echo -n "" > /tmp/123
+echo -n "" > pt_trace_log
+#echo -n "" > trace_dump
+rm -f perf.data-aux-idx*.bin 
+rm -f perf.data-sideband-cpu*.pevent
+rm -f perf.data*
+rm -rf sysroot
