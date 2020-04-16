@@ -451,7 +451,7 @@ def stitch(orig_bin_file_name, output_assembly_file_name, callback_file_name):
                             instrument_ind_call(out_f, opcode, instr.address, instr.op_str, next_addr, bb_next[0])
 
                     else: # instructions that are not jump/call
-                        if 'ptr [rip +' in instr.op_str:
+                        if 'ptr [rip +' in instr.op_str or ("lea" in opcode and "rip" in instr.op_str):
                             new_opstr = instr.op_str.replace('rip', 'rip + ' + 'RIP_L_' + str(RIP_L_IDX))
                             new_opstr = new_opstr.replace('xword ptr', 'tbyte ptr')
                             tmp_tokens = instr.op_str.split("]")[0].split()
