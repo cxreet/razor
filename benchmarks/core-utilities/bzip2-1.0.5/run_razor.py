@@ -48,10 +48,6 @@ def extend_debloat(prog_name):
     execute("""python ../../../stitcher/src/stitcher.py ./%s-extended.log ./%s.orig ./%s.s ./callbacks.txt""" % (prog_name, prog_name, prog_name))
     execute("""python ../../../stitcher/src/merge_bin.py %s.orig %s.s""" % (prog_name, prog_name))
 
-def debloat_patch(prog_name):
-    #execute("""python ../../../stitcher/src/stitcher.py ./%s-trace.log ./%s.orig ./%s.s ./callbacks.txt""" % (prog_name, prog_name, prog_name))
-    execute("""python ../../../stitcher/src/merge_bin.py %s.orig %s.s""" % (prog_name, prog_name))
-
 def clean():
     for fname in os.listdir('./'):
         if fname == "run_razor.py":
@@ -69,7 +65,7 @@ def clean():
         execute('rm -rf ./' + fname)
 
 def usage():
-    print('python run_razor.py train|test|debloat|extend_debloat|debloat_patch\n')
+    print('python run_razor.py clean|train|test|debloat|extend_debloat\n')
     sys.exit(1)
 
 def main():
@@ -94,9 +90,6 @@ def main():
 
     elif sys.argv[1] == 'extend_debloat':
         extend_debloat('bzip2')
-
-    elif sys.argv[1] == 'debloat_patch':
-        debloat_patch('bzip2')
 
     elif sys.argv[1] == 'clean':
         clean()
