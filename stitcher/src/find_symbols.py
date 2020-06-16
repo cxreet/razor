@@ -76,6 +76,9 @@ def find_symbols_for_plt(binname, asmname, callbacks_file_name="callbacks.txt"):
             function_name = tokens[1].split(">")[0].split("<")[-1]
             if function_name in libcalls:
                 function_address_2_name[addr] = function_name
+    cmd = "rm ./.%s.asm" % (binname)
+    p = subprocess.Popen(cmd, shell=True)
+    p.communicate()
 
     callbacks_file = open(callbacks_file_name, "w")
 
