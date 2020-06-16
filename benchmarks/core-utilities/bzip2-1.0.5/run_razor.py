@@ -59,9 +59,6 @@ def clean():
         if fname == "bzip2.orig":
             continue
 
-        if fname == "README.md":
-            continue
-
         execute('rm -rf ./' + fname)
 
 def usage():

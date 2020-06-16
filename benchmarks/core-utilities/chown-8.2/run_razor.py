@@ -178,13 +178,10 @@ def clean():
         if fname == "chown.orig":
             continue
 
-        if fname == "README.md":
-            continue
-
         execute('rm -rf ./' + fname)
 
 def usage():
-    print('python run_razor.py train|test|debloat|extend_debloat|debloat_patch\n')
+    print('python run_razor.py clean|train|test|debloat|extend_debloat|debloat_patch\n')
     sys.exit(1)
 
 def main():
