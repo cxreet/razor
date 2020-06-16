@@ -174,7 +174,8 @@ def read_trace(trace_log_file_name, orig_bin_file_name):
                         assert(False)
 
                 # create ind_calls from temp_ind_calls sorted by frequence
-                ind_calls[src_addr] = []
+                if src_addr not in ind_calls:
+                    ind_calls[src_addr] = []
                 tgts = sorted(temp_ind_calls.items(), key=operator.itemgetter(1), reverse=True)
                 for k in tgts:
                     ind_calls[src_addr].append(k[0])

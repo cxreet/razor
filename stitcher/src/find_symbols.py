@@ -59,6 +59,23 @@ def find_symbols_for_plt(binname, asmname, callbacks_file_name="callbacks.txt"):
 
     eb = elf_basic()
     libcalls = get_libcall_list()
+    
+    # Previously, we only handled functions pointers that are passed to .plt 
+    # functions. Now, we also handle functions like `atexit` that are not in .plt.
+    cmd = "objdump -d %s > .%s.asm" % (binname, binname)
+    p = subprocess.Popen(cmd, shell=True)
+    p.communicate()
+    function_address_2_name = dict()
+    with open(".%s.asm" % (binname), 'r') as in_f:
+        for line in in_f.readlines():
+            line = line.strip()
+            if not line.endswith(">:"):
+                continue
+            tokens = line.split()
+            addr = int("0x%s" % (tokens[0]), 16)
+            function_name = tokens[1].split(">")[0].split("<")[-1]
+            if function_name in libcalls:
+                function_address_2_name[addr] = function_name
 
     callbacks_file = open(callbacks_file_name, "w")
 
@@ -114,7 +131,9 @@ def find_symbols_for_plt(binname, asmname, callbacks_file_name="callbacks.txt"):
             old_bb = bb
             bb = get_next_bb(asm_file)
 
-    #print label2pltname
+    for addr in function_address_2_name:
+        old_label = "L_0x%x" % (addr)
+        label2pltname[old_label] = function_address_2_name[addr]
 
     pattern = re.compile(r"(?P<opcode>mov[abs]*)\t"
                           "(?P<reg>[erabcdspxil0-589w]{2,3}), "

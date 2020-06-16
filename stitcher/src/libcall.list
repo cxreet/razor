@@ -8,3 +8,4 @@ __libc_start_main,1,4,5,6
 tputs,3
 vidputs,2
 vid_puts,4
+atexit,1
