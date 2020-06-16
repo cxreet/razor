@@ -62,11 +62,11 @@ def find_symbols_for_plt(binname, asmname, callbacks_file_name="callbacks.txt"):
     
     # Previously, we only handled functions pointers that are passed to .plt 
     # functions. Now, we also handle functions like `atexit` that are not in .plt.
-    cmd = "objdump -d %s > .%s.asm" % (binname, binname)
+    cmd = "objdump -d %s > ./.%s.asm" % (binname, binname)
     p = subprocess.Popen(cmd, shell=True)
     p.communicate()
     function_address_2_name = dict()
-    with open(".%s.asm" % (binname), 'r') as in_f:
+    with open("./.%s.asm" % (binname), 'r') as in_f:
         for line in in_f.readlines():
             line = line.strip()
             if not line.endswith(">:"):
