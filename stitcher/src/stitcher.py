@@ -40,6 +40,9 @@ callbacks = {}
 # label for symbolization
 RIP_L_IDX = 0
 
+# plt function addresses
+plt_function_addrs = []
+
 def usage():
     print 'python stitcher.py trace-*-*.txt exe out_exe.s callbacks.txt'
     sys.exit(1)
@@ -89,6 +92,29 @@ def read_callbacks(callback_file_name):
                 callbacks[addr] = [idx]
             else:
                 callbacks[addr].append(idx)
+
+"""
+Find all plt function addresses.
+"""
+def find_plt_function_addresses(binname):
+    cmd = "objdump -d %s > ./.%s.asm" % (binname, binname)
+    p = subprocess.Popen(cmd, shell=True)
+    p.communicate()
+    addrs = list()
+
+    with open("./.%s.asm" % (binname), 'r') as in_f:
+        for line in in_f.readlines():
+            line = line.strip()
+            if not line.endswith("@plt>:"):
+                continue
+            tokens = line.split()
+            addr = int("0x%s" % (tokens[0]), 16)
+            addrs.append(addr)
+    cmd = "rm ./.%s.asm" % (binname)
+    p = subprocess.Popen(cmd, shell=True)
+    p.communicate()
+
+    return addrs
 
 """
 Read the trace log to get the executed block, taken/not-taken info
@@ -256,6 +282,10 @@ def instrument_ind_call(out_f, opcode, addr, real_tgt, next_addr, next_bb_addr):
     # all outside targets.
     has_outside_tgt = False
     targets = ind_calls[addr]
+
+    # fix: when a plt function only jumps to the next instruction, add a dummy target addresses
+    if addr in plt_function_addrs and len(targets) == 1 and targets[0] == addr + 6:
+        targets.append(0xffffffffffffffff)
     
     # rebuild the targets
     new_tgts = []
@@ -381,8 +411,11 @@ def stitch(orig_bin_file_name, output_assembly_file_name, callback_file_name):
     global pe, elf
     global RIP_L_IDX
     global entry_point, expect_module_base
+    global plt_function_addrs
 
     read_callbacks(callback_file_name)
+
+    plt_function_addrs = find_plt_function_addresses(orig_bin_file_name)
     
     with open(output_assembly_file_name, 'w') as out_f:
         # dump the entry point that is used by merge_bin.py
