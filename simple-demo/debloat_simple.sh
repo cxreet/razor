@@ -1,33 +1,52 @@
 #!/bin/bash
 
-set -ex
+#set -ex
 
-# clean up
-rm -rf logs simple_temp simple-trace.log callbacks.txt simple simple.s instr.s
-read -n1 ans
+if [ "$1" == "clean" ]; then
+	
+	set -ex
+	# clean up
+	rm -rf logs simple_temp simple-trace.log callbacks.txt simple simple.s instr.s
 
-# generate the binary
-gcc simple.c -O1 -o simple
-read -n1 ans
+elif [ "$1" == "build" ]; then
 
-# collect the execution trace
-../tracers/scripts/trace_with_dynamorio.sh ./simple 0 y
-rm -f logs; mkdir -p logs; mv dynamorio_trace logs/dynamorio_trace_simple
-read -n1 ans
+	set -ex
+	# generate the binary
+	gcc simple.c -O1 -o simple
 
-# combine multiple traces to one
-python ../stitcher/src/merge_log.py logs simple
-mv logs/simple-trace.log ./
-read -n1 ans
+elif [ "$1" == "trace" ]; then
 
-# dump executed instructions
-python ../stitcher/src/instr_dumper.py ./simple-trace.log ./simple ./instr.s
-read -n1 ans
+	set -ex
+	# collect the execution trace
+	../tracers/scripts/trace_with_dynamorio.sh ./simple 0 y
+	rm -f logs; mkdir -p logs; mv *.log logs/
 
-# instrument executed instructions
-python ../stitcher/src/find_symbols.py ./simple ./instr.s > ./callbacks.txt
-python ../stitcher/src/stitcher.py ./simple-trace.log ./simple ./simple.s ./callbacks.txt
-read -n1 ans
+elif [ "$1" == "merge_log" ]; then
 
-# merge old and new code
-python ../stitcher/src/merge_bin.py simple simple.s
+	set -ex
+	# combine multiple traces to one
+	python ../stitcher/src/merge_log.py ./logs simple
+	mv logs/simple-trace.log ./
+
+elif [ "$1" == "dump_inst" ]; then
+
+	set -ex
+	# dump executed instructions
+	python ../stitcher/src/instr_dumper.py ./simple-trace.log ./simple ./instr.s
+
+elif [ "$1" == "instrument" ]; then
+
+	set -ex
+	# instrument executed instructions
+	python ../stitcher/src/find_symbols.py ./simple ./instr.s > ./callbacks.txt
+	python ../stitcher/src/stitcher.py ./simple-trace.log ./simple ./simple.s ./callbacks.txt
+
+elif [ "$1" == "rewrite" ]; then
+
+	set -ex
+	# merge old and new code
+	python ../stitcher/src/merge_bin.py simple simple.s
+
+else
+	echo "./debloat_simple.sh  clean|build|trace|merge_log|dump_inst|instrument|rewrite"
+fi

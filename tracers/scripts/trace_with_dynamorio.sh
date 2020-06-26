@@ -12,4 +12,4 @@ $root_dir/dynamorio/bin64/drrun -c $root_dir/bin/libcbr_indcall.so -- $bin_cmd
 # tracing with all libraries
 #$root_dir/dynamorio/bin64/drrun -c $root_dir/bin/libcbr_indcall.so --lib -- $bin_cmd
 
-mv $root_dir/bin/*.log dynamorio_trace
+mv $root_dir/bin/*.log ./
