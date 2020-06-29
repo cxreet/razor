@@ -11,7 +11,7 @@ def main():
     usage = "usage: %prog cmd arg1 arg2"
     parser = OptionParser(usage=usage)
 
-    parser.add_option("-c", "--cmd", dest="cmd", help="The command: clean|build|trace|merge_log|dump_inst|instrument|rewrite")
+    parser.add_option("-c", "--cmd", dest="cmd", help="The command: clean|trace|merge_log|dump_inst|instrument|rewrite")
     parser.add_option("-a", "--taken", dest="taken", help="The `taken` argument.")
     parser.add_option("-b", "--target", dest="target", help="The `target` argument.")
     (options, args) = parser.parse_args()
@@ -26,10 +26,6 @@ def main():
 
     elif cmd == "clean":
         cmd = "rm -rf logs simple simple_temp simple-trace.log callbacks.txt *.s"
-        execute(cmd)
-
-    elif cmd == "build":
-        cmd = "gcc simple.c -O1 -o simple -no-pie"
         execute(cmd)
 
     elif cmd == "trace":
