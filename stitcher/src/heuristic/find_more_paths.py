@@ -33,7 +33,7 @@ INFERRED_IND_TGTS = {}
 ALL_PATHS = []
 
 def usage():
-    print "usage: python find_more_paths.py bin.asm trace.log out-extended.log"
+    print "usage: python find_more_paths.py bin.asm trace.log out-extended.log heuristic_level[1,2,3,4]"
     sys.exit(0)
 
 def is_addr_executed(addr):
@@ -607,7 +607,7 @@ def get_exe_meta(binpath):
     return (None, None)
 
 def main():
-    if len(sys.argv) != 4:
+    if len(sys.argv) != 5:
         usage()
 
     # set the recursion limit for deep searching
@@ -617,6 +617,8 @@ def main():
     global OBJ_FILE
     global EXE_START
     global EXE_END
+    global HEURISTIC_LEVEL
+    HEURISTIC_LEVEL = int(sys.argv[4])
     print "reading trace and constructing cfg..."
     OBJ_FILE = read_trace(sys.argv[2])
     """

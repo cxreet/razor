@@ -40,9 +40,9 @@ def debloat(logs_dir, prog_name):
     execute("""python ../../../stitcher/src/stitcher.py ./%s-trace.log ./%s.orig ./%s.s ./callbacks.txt""" % (prog_name, prog_name, prog_name))
     execute("""python ../../../stitcher/src/merge_bin.py %s.orig %s.s""" % (prog_name, prog_name))
 
-def extend_debloat(prog_name):
+def extend_debloat(prog_name, heuristic_level):
     execute("""python ../../../stitcher/src/heuristic/disasm.py ./%s.orig ./%s.orig.asm """ % (prog_name, prog_name))
-    execute("""python ../../../stitcher/src/heuristic/find_more_paths.py ./%s.orig.asm ./%s-trace.log ./%s-extended.log""" % (prog_name, prog_name, prog_name))
+    execute("""python ../../../stitcher/src/heuristic/find_more_paths.py ./%s.orig.asm ./%s-trace.log ./%s-extended.log %d""" % (prog_name, prog_name, prog_name, heuristic_level))
     execute("""python ../../../stitcher/src/instr_dumper.py ./%s-extended.log ./%s.orig ./instr.s""" % (prog_name, prog_name))
     execute("""python ../../../stitcher/src/find_symbols.py ./%s.orig ./instr.s""" % (prog_name))
     execute("""python ../../../stitcher/src/stitcher.py ./%s-extended.log ./%s.orig ./%s.s ./callbacks.txt""" % (prog_name, prog_name, prog_name))
@@ -66,7 +66,7 @@ def usage():
     sys.exit(1)
 
 def main():
-    if len(sys.argv) != 2:
+    if len(sys.argv) != 2 and len(sys.argv) != 3:
         usage()
 
     if not os.path.exists("./logs"):
@@ -86,7 +86,11 @@ def main():
         debloat('logs', 'bzip2')
 
     elif sys.argv[1] == 'extend_debloat':
-        extend_debloat('bzip2')
+        if len(sys.argv) != 3:
+            print("Please specify heuristic level (i.e., 1 ~ 4).")
+            sys.exit(1)
+        heuristic_level = int(sys.argv[2])
+        extend_debloat('bzip2', heuristic_level)
 
     elif sys.argv[1] == 'clean':
         clean()
