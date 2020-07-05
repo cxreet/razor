@@ -12,28 +12,28 @@ def main():
     parser = OptionParser(usage=usage)
 
     parser.add_option("-c", "--cmd", dest="cmd", help="The command: clean|trace|merge_log|dump_inst|instrument|rewrite")
-    parser.add_option("-a", "--taken", dest="taken", help="The `taken` argument.")
-    parser.add_option("-b", "--target", dest="target", help="The `target` argument.")
+    parser.add_option("-a", "--a", dest="a", help="The `a` argument.")
+    parser.add_option("-b", "--b", dest="b", help="The `b` argument.")
     (options, args) = parser.parse_args()
 
     cmd = options.cmd
-    taken = options.taken
-    target = options.target
+    a = options.a
+    b = options.b
     
     if not cmd:
         parser.print_help()
         sys.exit(1)
 
     elif cmd == "clean":
-        cmd = "rm -rf logs simple_temp simple-trace.log callbacks.txt *.s"
+        cmd = "rm -rf logs simple_temp simple-trace.log simple.asm simple-extended.log callbacks.txt *.s"
         execute(cmd)
 
     elif cmd == "trace":
-        if not taken or not target:
+        if not a or not b:
             parser.print_help()
             sys.exit(1)
 
-        cmd = "../tracers/scripts/trace_with_dynamorio.sh ./simple %s %s" % (taken, target)
+        cmd = "../tracers/scripts/trace_with_dynamorio.sh ./simple %s %s" % (a, b)
         execute(cmd)
 
         cmd = "mkdir -p logs; mv *.log logs/"
