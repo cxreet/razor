@@ -1,48 +1,54 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-typedef void (*Ftype)();
-
-void printYes() { printf("Yes\n"); }
-void printNo() { printf("No\n"); }
-
 void test_heuristic_one(int a, int b) {
+	printf("Testing heuristic one...\n");
 	if (a > b) {
-		printf("a > b\n");
+		printf("%d > %d\n", a , b);
 	}
-	printf("Test heuristic one.\n");
+	printf("Done.\n");
 	
 	return;
 }
 
 int test_heuristic_two(int a, int b) {
+	printf("Testing heuristic two...\n");
 	int ret = 0;
 	if (a > b) {
-		printf("a > b\n");
+		printf("%d > %d\n", a, b);
 		ret = a - b;
 	} else {
 		ret = b - a;	
 	}
-	printf("Test heuristic two.\n");
+	printf("Done.\n");
 	return ret;
 }
 
 void test_heuristic_three(int a, int b) {
+	printf("Testing herusitc three...\n");
 	if (a > b) {
-		printf("a > b\n");
+		printf("%d > %d\n", a, b);
 	} else {
-		printf("a <= b\n");
+		printf("%d <= %d\n", a, b);
 	}
-	printf("Test heuristic three.\n");
+	printf("Done.\n");
+}
+
+void call_new_libcalls(int a, int b) {
+		putw(a, stdout);
+		printf(" <= ");
+		putw(b, stdout);
+		printf("\n");
 }
 
 void test_heuristic_four(int a, int b) {
+	printf("Testing heuristic four...\n");
 	if (a > b) {
-		printf("a > b\n");
+		printf("%d > %d\n", a, b);
 	} else {
-		fprintf(stdout, "a <= b\n");
+		call_new_libcalls(a, b);
 	}
-	printf("Test heuristic four.\n");
+	printf("Done.\n");
 }
 
 int main(int argc, char * argv[]) {
