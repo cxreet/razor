@@ -164,23 +164,30 @@ def check_least_call(bb):
 
 def check_least_libcall(bb):
     func = bb.func
-
+    
     for callee in func.callees:
         if callee.is_plt and (callee not in EXECUTED_LIB_FUNCS):
             return False
-
+        elif not callee.is_plt:
+            #check whether the whole function
+            for tmp_callee in callee.callees:
+                if tmp_callee.is_plt and (tmp_callee not in EXECUTED_LIB_FUNCS):
+                    return False
+    
     return True
 
 def check_least_privilege(bb):
-    # TODO
+    # TODO: port and fix the old implementation
     return True
 
 # check whether the path introduces different functionality
 def check_bb(bb):
     # patch: for this function, too many if-else, the path inferring gets
     # stuck.
+    """
     if bb.func.func_start == 0x413400:
         return True
+    """
 
     if HEURISTIC_STATIC_CFG:
         return True
@@ -430,20 +437,6 @@ def find_new_functions_recursively(new_functions):
     return
 
 
-def patch_new_functions():
-    ret = []
-    # to add functions: 0x4224d0
-    addrs = [0x4224d0, 0x425830, 0x409960, 0x412990, 0x405c30, 0x405b70, 0x4310c4,
-             0x40d070, 0x422ee0, 0x424850, 0x422ef0, 0x423bb0, 0x424150, 0x423900,
-             0x422f60, 0x4235c0, 0x424020, 0x412b60, 0x424580, 0x4256d0, 0x412bd0,
-             0x426eb0, 0x412560]
-
-    for addr in addrs:
-        func = OBJ_FILE.find_func_with_inst_addr(addr)
-        ret.append(func)
-
-    return ret
-
 def generate_extended_trace(paths):
     new_functions = []
     new_bbs = []
@@ -496,13 +489,6 @@ def generate_extended_trace(paths):
                 
                 if not new_func.is_executed:
                     new_functions.append(new_func)
-    
-    # PATCH: add non-traced functions
-    """
-    for func in patch_new_functions():
-        if func not in new_functions and (not func.is_executed):
-            new_functions.append(func)
-    """
     
     new_functions = list(set(new_functions))
     
