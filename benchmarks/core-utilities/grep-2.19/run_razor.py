@@ -111,7 +111,7 @@ def clean():
         if fname.startswith('test') or fname.startswith('train'):
             continue
         
-        if fname == "grep.orig":
+        if fname == "grep.orig" or fname == "grep-2.19.c.orig.c":
             continue
 
         execute('rm -rf ./' + fname)

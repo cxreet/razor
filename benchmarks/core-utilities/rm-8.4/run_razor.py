@@ -158,7 +158,7 @@ def clean():
         if fname == "rm.orig":
             continue
 
-        if fname == "README.md":
+        if fname == "README.md" or fname == "rm-8.4.c.orig.c":
             continue
 
         execute('rm -rf ./' + fname)

@@ -65,7 +65,7 @@ def clean():
         if fname.startswith('test') or fname.startswith('train'):
             continue
         
-        if fname == "sort.orig":
+        if fname == "sort.orig" or fname == "sort-8.16.c.orig.c":
             continue
 
         execute('rm -rf ./' + fname)

@@ -175,7 +175,7 @@ def clean():
         if fname == 'test' or fname == 'train':
             continue
 
-        if fname == "chown.orig":
+        if fname == "chown.orig" or fname == "chown-8.2.c.orig.c":
             continue
 
         execute('rm -rf ./' + fname)

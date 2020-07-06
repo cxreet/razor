@@ -137,7 +137,7 @@ def clean():
         if fname == 'test' or fname == 'train':
             continue
         
-        if fname == "date.orig":
+        if fname == "date.orig" or fname == "date-8.21.c.orig.c":
             continue
 
         execute('rm -rf ./' + fname)

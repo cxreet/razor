@@ -73,7 +73,7 @@ def clean():
         if fname.startswith('test') or fname.startswith('train'):
             continue
         
-        if fname == "uniq.orig":
+        if fname == "uniq.orig" or fname == "uniq-8.16.c.orig.c":
             continue
 
         execute('rm -rf ./' + fname)

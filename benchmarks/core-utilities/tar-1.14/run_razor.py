@@ -53,7 +53,7 @@ def clean():
         if fname == 'test' or fname == 'train':
             continue
 
-        if fname == "tar.orig":
+        if fname == "tar.orig" or fname == "tar-1.14.c.orig.c":
             continue
 
         execute('rm -rf ./' + fname)

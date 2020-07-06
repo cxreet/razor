@@ -53,7 +53,7 @@ def clean():
         if fname == 'test' or fname == 'train':
             continue
 
-        if fname == "gzip.orig":
+        if fname == "gzip.orig" or fname == "gzip-1.2.4.c.orig.c":
             continue
 
         execute('rm -rf ./' + fname)

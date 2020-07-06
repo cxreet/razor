@@ -141,7 +141,7 @@ def clean():
         if fname.startswith('test') or fname.startswith('train'):
             continue
         
-        if fname == "mkdir.orig":
+        if fname == "mkdir.orig" or fname == "mkdir-5.2.1.c.orig.c":
             continue
 
         execute('rm -rf ./' + fname)

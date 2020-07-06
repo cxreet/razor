@@ -56,7 +56,7 @@ def clean():
         if fname == 'test' or fname == 'train':
             continue
 
-        if fname == "bzip2.orig":
+        if fname == "bzip2.orig" or fname == "bzip2-1.0.5.c.orig.c":
             continue
 
         execute('rm -rf ./' + fname)
