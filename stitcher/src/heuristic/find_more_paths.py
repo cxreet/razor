@@ -25,6 +25,7 @@ CND_TABLE = {}
 IND_CALL_LINES = []
 IND_CALL_2_TGTS = {}
 EXECUTED_LIB_FUNCS = []
+EXECUTED_LIBCALL_GROUPS = []
 
 # the threshold for path length
 MAX_PATH_LENGTH = 64
@@ -67,6 +68,7 @@ def read_trace(trace_file):
     global IND_CALL_LINES
     global IND_CALL_2_TGTS
     global EXECUTED_LIB_FUNCS
+    global EXECUTED_LIBCALL_GROUPS
 
     obj_file = None
     
@@ -102,6 +104,9 @@ def read_trace(trace_file):
                     for callee in callees:
                         if callee.is_plt and (callee not in EXECUTED_LIB_FUNCS):
                             EXECUTED_LIB_FUNCS.append(callee)
+                            for group in LIBCALL_GROUPS:
+                                if callee.name in LIBCALL_GROUPS[group] and group not in EXECUTED_LIBCALL_GROUPS:
+                                    EXECUTED_LIBCALL_GROUPS.append(group)
 
                     if addr in func.blocks:
                         basic_block = func.blocks[addr]
@@ -176,8 +181,39 @@ def check_least_libcall(bb):
     
     return True
 
+def find_group(name):
+    groups = []
+    for group in LIBCALL_GROUPS:
+        if name in LIBCALL_GROUPS[group]:
+            groups.append(group)
+    return groups
+
 def check_least_privilege(bb):
     # TODO: port and fix the old implementation
+    func = bb.func
+    
+    for callee in func.callees:
+        if callee.is_plt and (callee not in EXECUTED_LIB_FUNCS):
+            groups = find_group(callee.name)
+            found = False
+            for group in groups:
+                if group in EXECUTED_LIBCALL_GROUPS:
+                    found = True
+                    break
+            if not found:
+                return False
+        elif not callee.is_plt:
+            #check whether the whole function
+            for tmp_callee in callee.callees:
+                if tmp_callee.is_plt and (tmp_callee not in EXECUTED_LIB_FUNCS):
+                    groups = find_group(tmp_callee.name)
+                    found = False
+                    for group in groups:
+                        if group in EXECUTED_LIBCALL_GROUPS:
+                            found = True
+                            break
+                    if not found:
+                        return False
     return True
 
 # check whether the path introduces different functionality
@@ -604,6 +640,12 @@ def main():
     global EXE_START
     global EXE_END
     global HEURISTIC_LEVEL
+    global LIBCALL_GROUPS
+
+    # read the libcall groups
+    with open(os.path.join(os.path.dirname(os.path.abspath(__file__)), 'libcall.groups'), 'r') as f:
+            LIBCALL_GROUPS = json.load(f)
+
     HEURISTIC_LEVEL = int(sys.argv[4])
     print "reading trace and constructing cfg..."
     OBJ_FILE = read_trace(sys.argv[2])
@@ -613,6 +655,9 @@ def main():
     """
     (EXE_START, EXE_END) = get_exe_meta(OBJ_FILE.path)
     print "EXE: ", hex(EXE_START), hex(EXE_END)
+
+    print EXECUTED_LIBCALL_GROUPS
+    
     
     # infer paths from conditional branches
     print "inferring paths from conditional branches..."
