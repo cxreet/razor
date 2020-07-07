@@ -171,7 +171,7 @@ def find_symbols_for_plt(binname, asmname, callbacks_file_name="callbacks.txt"):
                                 if m != None and arg in instr:
                                     #print "matched", instr
                                     #print m.group("imm")
-                                    print label, index
+                                    #print label, index
                                     callbacks_file.write(label + " " + str(index) + "\n")
                                     arg_done[arg] = 0
 
