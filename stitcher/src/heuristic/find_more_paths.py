@@ -26,6 +26,7 @@ IND_CALL_LINES = []
 IND_CALL_2_TGTS = {}
 EXECUTED_LIB_FUNCS = []
 EXECUTED_LIBCALL_GROUPS = []
+MISSING_LIB_FUNCS = []
 
 # the threshold for path length
 MAX_PATH_LENGTH = 64
@@ -169,14 +170,20 @@ def check_least_call(bb):
 
 def check_least_libcall(bb):
     func = bb.func
+
+    global MISSING_LIB_FUNCS
     
     for callee in func.callees:
         if callee.is_plt and (callee not in EXECUTED_LIB_FUNCS):
+            if callee not in MISSING_LIB_FUNCS:
+                MISSING_LIB_FUNCS.append(callee)
             return False
         elif not callee.is_plt:
             #check whether the whole function
             for tmp_callee in callee.callees:
                 if tmp_callee.is_plt and (tmp_callee not in EXECUTED_LIB_FUNCS):
+                    if tmp_callee not in MISSING_LIB_FUNCS:
+                        MISSING_LIB_FUNCS.append(tmp_callee)
                     return False
     
     return True
@@ -191,6 +198,8 @@ def find_group(name):
 def check_least_privilege(bb):
     # TODO: port and fix the old implementation
     func = bb.func
+
+    global MISSING_LIB_FUNCS
     
     for callee in func.callees:
         if callee.is_plt and (callee not in EXECUTED_LIB_FUNCS):
@@ -201,6 +210,8 @@ def check_least_privilege(bb):
                     found = True
                     break
             if not found:
+                if callee not in MISSING_LIB_FUNCS:
+                    MISSING_LIB_FUNCS.append(callee)
                 return False
         elif not callee.is_plt:
             #check whether the whole function
@@ -213,6 +224,8 @@ def check_least_privilege(bb):
                             found = True
                             break
                     if not found:
+                        if tmp_callee not in MISSING_LIB_FUNCS:
+                            MISSING_LIB_FUNCS.append(tmp_callee)
                         return False
     return True
 
@@ -656,9 +669,6 @@ def main():
     (EXE_START, EXE_END) = get_exe_meta(OBJ_FILE.path)
     print "EXE: ", hex(EXE_START), hex(EXE_END)
 
-    print EXECUTED_LIBCALL_GROUPS
-    
-    
     # infer paths from conditional branches
     print "inferring paths from conditional branches..."
     infer_paths_from_cnd_branch()
@@ -669,6 +679,18 @@ def main():
 
     print "generating extended log..."
     generate_extended_trace(ALL_PATHS)
+
+    print "========Executed lib functions:"
+    for func in EXECUTED_LIB_FUNCS:
+        print " ", func.name
+
+    print "========Executed lib function groups:"
+    for group in EXECUTED_LIBCALL_GROUPS:
+        print " ", group
+
+    print "========Missing lib functions:"
+    for func in MISSING_LIB_FUNCS:
+        print " ", func.name
 
 if __name__ == "__main__":
     main()
