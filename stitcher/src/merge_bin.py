@@ -18,7 +18,7 @@ def get_new_segment_base_addr(bin_name):
         seg_infos = eb.get_segment_info(bin_name, "*")
         for seg_info in seg_infos:
             mem_addr_end = int(seg_info["vaddr"], 16) + int(seg_info["memsz"], 16)
-            print hex(int(seg_info["vaddr"], 16)), hex(mem_addr_end)
+            #print hex(int(seg_info["vaddr"], 16)), hex(mem_addr_end)
             if mem_addr_end > max_mem_addr:
                 max_mem_addr = mem_addr_end
         return (max_mem_addr / 0x100000 + 1) * 0x100000
@@ -48,8 +48,8 @@ def relocate_interp(binname):
     interp_offset = eb.get_section_info(binname,".interp", "offset")
     interp_size = eb.get_section_info(binname,".interp", "size")
 
-    print "interp offset : %x" % interp_offset
-    print "interp size   : %x" % interp_size
+    #print "interp offset : %x" % interp_offset
+    #print "interp size   : %x" % interp_size
 
     #now get the PHDR information
     phdr_num = eb.get_elfhdr_info(binname, "Number of program headers:");
@@ -68,12 +68,12 @@ def relocate_interp(binname):
     #get phdr header info of interpreter
     interp_vaddr = eb.get_phdr_info(binname, PHDR.PT_INTERP, PHDR.p_vaddr_offset);
     interp_paddr = eb.get_phdr_info(binname, PHDR.PT_INTERP, PHDR.p_paddr_offset);
-    print "interpreter vaddr : %lx" % interp_vaddr
-    print "interpreter paddr : %lx" % interp_paddr
+    #print "interpreter vaddr : %lx" % interp_vaddr
+    #print "interpreter paddr : %lx" % interp_paddr
     new_interp_vaddr = (interp_vaddr & (~0xfff)) | (new_interp_offset & 0xfff)
     new_interp_paddr = (interp_paddr & (~0xfff)) | (new_interp_offset & 0xfff)
-    print "new interpreter vaddr : %lx" % new_interp_vaddr
-    print "new interpreter paddr : %lx" % new_interp_paddr
+    #print "new interpreter vaddr : %lx" % new_interp_vaddr
+    #print "new interpreter paddr : %lx" % new_interp_paddr
 
     #modify the interp offset
     fd = os.open(binname, os.O_RDWR);
@@ -94,7 +94,7 @@ def relocate_interp(binname):
             os.write(fd, pack(pfmt(PHDR.p_paddr_size), new_interp_paddr))
             os.lseek(fd, -(PHDR.p_paddr_offset + PHDR.p_paddr_size), os.SEEK_CUR)
 
-            print "modifying interp offset to %lx" % new_interp_offset
+            #print "modifying interp offset to %lx" % new_interp_offset
             break
         os.lseek(fd, phdr_size, os.SEEK_CUR)
 
@@ -132,7 +132,7 @@ def extend_phdr(binname):
     segment_base = get_new_segment_base_addr(binname);
     mytext_base = segment_base + (0x00000fff & mytext_addr)
 
-    print hex(mytext_base)
+    #print hex(mytext_base)
 
     paddr = mytext_base
     fsize = mytext_size
@@ -140,7 +140,7 @@ def extend_phdr(binname):
     flags = PHDR.PF_X | PHDR.PF_R # EXEC|READ
     align = 0x00001000
 
-    print "offset of the new program header: %d" % new_ph_offset
+    #print "offset of the new program header: %d" % new_ph_offset
 
     #change phdr header count (increment by one)
     #fd = os.open(binname, os.O_RDWR);
@@ -214,7 +214,7 @@ def update_shdr(bin_name, orig_asm_name, new_obj_name):
     global eb
 
     #fill the section table with valid value
-    print "mytext_base: %lx" % mytext_base
+    #print "mytext_base: %lx" % mytext_base
     eb.modify_section_info(bin_name, ".mytext", "addr", mytext_base);
     eb.modify_section_info(bin_name, ".mytext", "flags", 0x00000006);#flags: ALLOC|EXEC
 
@@ -222,7 +222,7 @@ def update_shdr(bin_name, orig_asm_name, new_obj_name):
         line = asm_file.readline()
         orig_ep = line.strip().split()[1]
         new_ep_offset = eb.find_label_offset(new_obj_name, "L_" + orig_ep)
-        print orig_ep, hex(new_ep_offset)
+        #print orig_ep, hex(new_ep_offset)
     eb.modify_elfhdr_info(bin_name, "entrypoint", mytext_base + new_ep_offset)
 
     return
@@ -274,7 +274,7 @@ def fix_rel(bin_name, new_obj_name):
                 label_offset = eb.find_label_offset(new_obj_name, label_ni)
                 abs_addr = label_offset + addend - offset
                 value = abs_addr - (sec_addr + label_offset)
-                print label_ni, hex(label_offset), "abs_addr", hex(abs_addr), hex(value)
+                #print label_ni, hex(label_offset), "abs_addr", hex(abs_addr), hex(value)
                 os.lseek(fd, sec_offset + offset, os.SEEK_SET)
                 os.write(fd, pack(pfmt(4), value))
             elif name.startswith(".text"):
@@ -310,7 +310,7 @@ def fix_ctors_dtors(binname, new_obj_name):
 
     fini_array_sec_size = eb.get_section_info(binname, ".fini_array", "size")
     fini_array_sec_offset = eb.get_section_info(binname, ".fini_array", "offset")
-    print hex(fini_array_sec_size), hex(fini_array_sec_offset)
+    #print hex(fini_array_sec_size), hex(fini_array_sec_offset)
     if fini_array_sec_size == 0 or fini_array_sec_size == None:
         return
 
@@ -322,7 +322,7 @@ def fix_ctors_dtors(binname, new_obj_name):
         value = unpack(pfmt(ARCH.INT_SIZE), os.read(fd, ARCH.INT_SIZE))[0]
         label_name = "L_0x%x" % value
         label_new_offset = eb.find_label_offset(new_obj_name, label_name)
-        print label_name, hex(label_new_offset)
+        #print label_name, hex(label_new_offset)
         label_new_addr = mytext_base + label_new_offset
         os.lseek(fd, -ARCH.INT_SIZE, os.SEEK_CUR)
         os.write(fd, pack(pfmt(ARCH.INT_SIZE), label_new_addr))
@@ -333,7 +333,7 @@ def fix__fini(binname, new_obj_name):
 
     _fini_value = eb.read_dynamic_option(binname, DYNAMIC.DT_FINI)
     label_name = "L_0x%x" % _fini_value
-    print label_name
+    #print label_name
     label_new_offset = eb.find_label_offset(new_obj_name, label_name)
 
     # _fini is never executed
@@ -349,8 +349,8 @@ def fix_symtab(binname, new_obj_name):
     dynsym_sec_offset = eb.get_section_info(binname, ".symtab", "offset")
     dynsym_sec_entry_size = eb.get_section_info(binname, ".symtab", "entrysize")
     dynsym_sec_size = eb.get_section_info(binname, ".symtab", "size")
-    print dynsym_sec_size
-    print dynsym_sec_entry_size
+    #print dynsym_sec_size
+    #print dynsym_sec_entry_size
     dynsym_sec_entry_num =  dynsym_sec_size / dynsym_sec_entry_size
     
     fd = os.open(binname, os.O_RDWR)
@@ -370,17 +370,17 @@ def fix_symtab(binname, new_obj_name):
             stype = ST_TYPE(info)
             #print "type", stype
             if stype == SYMT.STT_FUNC:
-                print index, value, stype
+                #print index, value, stype
                 os.lseek(fd, SYMT.st_value_offset, os.SEEK_CUR)
                 value = unpack(pfmt(SYMT.st_value_size), os.read(fd, SYMT.st_value_size))[0]
                 os.lseek(fd, -(SYMT.st_value_offset + SYMT.st_value_size), os.SEEK_CUR)
-                print hex(value)
+                #print hex(value)
                 label = "L_0x%x" % value
-                print label
+                #print label
                 new_offset = eb.find_label_offset(new_obj_name, label)
                 if new_offset != None:
                     new_addr = mytext_base + new_offset
-                    print hex(new_addr)
+                    #print hex(new_addr)
                     os.lseek(fd, SYMT.st_value_offset, os.SEEK_CUR)
                     value = pack(pfmt(SYMT.st_value_size), new_addr)
                     os.write(fd, value)
@@ -393,8 +393,8 @@ def fix_dynsym(binname, new_obj_name):
     dynsym_sec_offset = eb.get_section_info(binname, ".dynsym", "offset")
     dynsym_sec_entry_size = eb.get_section_info(binname, ".dynsym", "entrysize")
     dynsym_sec_size = eb.get_section_info(binname, ".dynsym", "size")
-    print dynsym_sec_size
-    print dynsym_sec_entry_size
+    #print dynsym_sec_size
+    #print dynsym_sec_entry_size
     dynsym_sec_entry_num =  dynsym_sec_size / dynsym_sec_entry_size
     
     fd = os.open(binname, os.O_RDWR)
@@ -414,17 +414,17 @@ def fix_dynsym(binname, new_obj_name):
             stype = ST_TYPE(info)
             #print "type", stype
             if stype == SYMT.STT_FUNC:
-                print index, value, stype
+                #print index, value, stype
                 os.lseek(fd, SYMT.st_value_offset, os.SEEK_CUR)
                 value = unpack(pfmt(SYMT.st_value_size), os.read(fd, SYMT.st_value_size))[0]
                 os.lseek(fd, -(SYMT.st_value_offset + SYMT.st_value_size), os.SEEK_CUR)
-                print hex(value)
+                #print hex(value)
                 label = "L_0x%x" % value
-                print label
+                #print label
                 new_offset = eb.find_label_offset(new_obj_name, label)
                 if new_offset != None:
                     new_addr = mytext_base + new_offset
-                    print hex(new_addr)
+                    #print hex(new_addr)
                     os.lseek(fd, SYMT.st_value_offset, os.SEEK_CUR)
                     value = pack(pfmt(SYMT.st_value_size), new_addr)
                     os.write(fd, value)
@@ -476,10 +476,10 @@ def merge_bin_asm(orig_bin_path, orig_asm_path):
     fix_symtab(bin_name, new_obj_name)
 
     eb.analyze_eh_frame_hdr(bin_name, new_obj_name, mytext_base)
-    print "elf_frame_hdr_less", hex(eb.elf_frame_hdr_less)
+    #print "elf_frame_hdr_less", hex(eb.elf_frame_hdr_less)
     eb.analyze_eh_frame(bin_name, new_obj_name, mytext_base)
-    print "uleb128_less", hex(eb.uleb128_less)
-    print "uleb128_more", hex(eb.uleb128_more)
+    #print "uleb128_less", hex(eb.uleb128_less)
+    #print "uleb128_more", hex(eb.uleb128_more)
 
 def main():
 

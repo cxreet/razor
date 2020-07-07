@@ -480,7 +480,7 @@ def stitch(orig_bin_file_name, output_assembly_file_name, callback_file_name):
                                 out_f.write("\t\t{}\t{}\n".format(opcode, 'L_{}'.format(instr.op_str)))
 
                         else: # indirect jump/call
-                            print hex(instr.address)
+                            #print hex(instr.address)
                             assert((instr.address) in ind_calls)
                             instrument_ind_call(out_f, opcode, instr.address, instr.op_str, next_addr, bb_next[0])
 

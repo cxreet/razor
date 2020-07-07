@@ -197,7 +197,7 @@ class elf_basic(object):
             os.lseek(fd, PHDR.p_type_offset, os.SEEK_CUR)
             ptype = unpack(pfmt(PHDR.p_type_size), os.read(fd, PHDR.p_type_size))[0];
             os.lseek(fd, -(PHDR.p_type_offset + PHDR.p_type_size), os.SEEK_CUR)
-            print "idx:%x, type:%x" % (idx, ptype)
+            #print "idx:%x, type:%x" % (idx, ptype)
             if(ptype == seg_type):
                 break
             os.lseek(fd, phdr_size, os.SEEK_CUR)
@@ -221,7 +221,7 @@ class elf_basic(object):
             os.lseek(fd, PHDR.p_type_offset, os.SEEK_CUR)
             ptype = unpack(pfmt(PHDR.p_type_size), os.read(fd, PHDR.p_type_size))[0];
             os.lseek(fd, -(PHDR.p_type_offset + PHDR.p_type_size), os.SEEK_CUR)
-            print "idx:%x, type:%x" % (idx, ptype)
+            #print "idx:%x, type:%x" % (idx, ptype)
             if(ptype == seg_type):
                 cur_pos = os.lseek(fd, 0, os.SEEK_CUR)
                 os.close(fd)
@@ -244,7 +244,7 @@ class elf_basic(object):
             os.lseek(fd, PHDR.p_type_offset, os.SEEK_CUR)
             ptype = unpack(pfmt(PHDR.p_type_size), os.read(fd, PHDR.p_type_size))[0];
             os.lseek(fd, -(PHDR.p_type_offset + PHDR.p_type_size), os.SEEK_CUR)
-            print "idx:%x, type:%x" % (idx, ptype)
+            #print "idx:%x, type:%x" % (idx, ptype)
             if(ptype == seg_type):
                 break
             os.lseek(fd, phdr_size, os.SEEK_CUR)
@@ -520,7 +520,7 @@ class elf_basic(object):
 
         if self.binname != binname:
             self.binname = binname
-            print binname
+            #print binname
 
             if self.sym_off_array == None:
                 self.sym_off_array = [[None,None] for x in xrange(0, self.exec_size)]
@@ -754,7 +754,7 @@ class elf_basic(object):
                 write_index += 1
             index += 1
 
-        print "index is", index, "write_index is", write_index
+        #print "index is", index, "write_index is", write_index
         effective_fde_count = write_index
 
         cur_foff = self.fde_table[write_index][0]  
