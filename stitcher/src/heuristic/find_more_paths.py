@@ -13,6 +13,7 @@ FIND_FUNCTION_RECURSIVELY = True
 LOOP_ITE_NUM = 2
 #SENSITIVE_LIBCALLS = ['execl', 'execle', 'execlp', 'execv', 'execve', 'execvp']
 LIBCALL_GROUPS = {}
+PATCH_LIBCALLS = []
 
 OBJ_FILE = None
 IS_MAIN_BINARY = True
@@ -209,11 +210,18 @@ def check_least_privilege(bb):
                 if group in EXECUTED_LIBCALL_GROUPS:
                     found = True
                     break
+
+            if callee.name in PATCH_LIBCALLS:
+                found = True
+
             if not found:
                 if callee not in MISSING_LIB_FUNCS:
                     MISSING_LIB_FUNCS.append(callee)
+
                 return False
+
         elif not callee.is_plt:
+
             #check whether the whole function
             for tmp_callee in callee.callees:
                 if tmp_callee.is_plt and (tmp_callee not in EXECUTED_LIB_FUNCS):
@@ -223,6 +231,10 @@ def check_least_privilege(bb):
                         if group in EXECUTED_LIBCALL_GROUPS:
                             found = True
                             break
+
+                    if tmp_callee.name in PATCH_LIBCALLS:
+                        found = True
+
                     if not found:
                         if tmp_callee not in MISSING_LIB_FUNCS:
                             MISSING_LIB_FUNCS.append(tmp_callee)
@@ -654,10 +666,18 @@ def main():
     global EXE_END
     global HEURISTIC_LEVEL
     global LIBCALL_GROUPS
+    global PATCH_LIBCALLS
 
     # read the libcall groups
-    with open(os.path.join(os.path.dirname(os.path.abspath(__file__)), 'libcall.groups'), 'r') as f:
+    cur_dir = os.path.dirname(os.path.abspath(__file__))
+    with open(os.path.join(cur_dir, 'libcall.groups'), 'r') as f:
             LIBCALL_GROUPS = json.load(f)
+    
+    # read the patches of lib calls
+    with open(os.path.join(cur_dir, 'libcall.patch'), 'r') as f:
+        for line in f.readlines():
+            line = line.strip()
+            PATCH_LIBCALLS.append(line)
 
     HEURISTIC_LEVEL = int(sys.argv[4])
     print "reading trace and constructing cfg..."
