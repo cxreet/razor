@@ -87,6 +87,50 @@ def test():
     test_run( """ -E '\b(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?\.)3}(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)'  ./test2  > log1""")
     return
 
+def get_traces_for_test(logs_dir, prog_name):
+    train_run( """ "a" ./test1  > log1""")
+    train_run( """ "a" ./test2  > log1""")
+    train_run( """ -n "si" ./test1  > log1""")
+    train_run( """ -n "si" ./test2  > log1""")
+    train_run( """ -o [r][a][n][d]* ./test1  > log1""")
+    train_run( """ -o [r][a][n][d]* ./test2  > log1""")
+    train_run( """ -v "a" ./test1  > log1""")
+    train_run( """ -v "a" ./test2  > log1""")
+    train_run( """ -i "Si" ./test1  > log1""")
+    train_run( """ -i "Si" ./test2  > log1""")
+    train_run( """ -w "Si" ./test1  > log1""")
+    train_run( """ -w "Si" ./test2  > log1""")
+    train_run( """ -x "Don't" ./test1  > log1""")
+    train_run( """ -x "Don't" ./test2  > log1""")
+    train_run( """ -E "randomtext*" ./test1  > log1""")
+    train_run( """ -E "randomtext*" ./test2  > log1""")
+    train_run( """ "ye " ./test1  > log1""")
+    train_run( """ "ye " ./test2  > log1""")
+    train_run( """ "cold" ./test1  > log1""")
+    train_run( """ "cold" ./test2  > log1""")
+    train_run( """ "not exist" ./test1  > log1""")
+    train_run( """ "not exist" ./test2  > log1""")
+    train_run( """ ^D  ./test1  > log1""")
+    train_run( """ ^D  ./test2  > log1""")
+    train_run( """ .$  ./test1  > log1""")
+    train_run( """ .$  ./test2  > log1""")
+    train_run( """ \^  ./test1  > log1""")
+    train_run( """ \^  ./test2  > log1""")
+    train_run( """ \^$  ./test1  > log1""")
+    train_run( """ \^$  ./test2  > log1""")
+    train_run( """ ^[AEIOU]  ./test1  > log1""")
+    train_run( """ ^[AEIOU]  ./test2  > log1""")
+    train_run( """ ^[^AEIOU]  ./test1  > log1""")
+    train_run( """ ^[^AEIOU]  ./test2  > log1""")
+    train_run( """ -E "free[^[:space:]]+"  ./test1  > log1""")
+    train_run( """ -E "free[^[:space:]]+"  ./test2  > log1""")
+    train_run( """ -E '\b(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?\.)3}(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)'  ./test1  > log1""")
+    train_run( """ -E '\b(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?\.)3}(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)'  ./test2  > log1""")
+
+    execute("""python ../../../stitcher/src/merge_log.py %s %s""" % (logs_dir, prog_name))
+    execute("""mkdir -p ./backup""")
+    execute("""mv %s/%s-trace.log ./backup/""" % (logs_dir, prog_name))
+
 def debloat(logs_dir, prog_name):
     execute("""python ../../../stitcher/src/merge_log.py %s %s""" % (logs_dir, prog_name))
     execute("""mv %s/%s-trace.log ./""" % (logs_dir, prog_name))
@@ -108,7 +152,7 @@ def clean():
         if fname == "run_razor.py":
             continue
         
-        if fname.startswith('test') or fname.startswith('train'):
+        if fname.startswith('test') or fname.startswith('train') or fname == "backup":
             continue
         
         if fname == "grep.orig" or fname == "grep-2.19.c.orig.c":
@@ -117,7 +161,7 @@ def clean():
         execute('rm -rf ./' + fname)
 
 def usage():
-    print('python run_razor.py clean|train|test|debloat|extend_debloat\n')
+    print('python run_razor.py clean|train|test|debloat|extend_debloat|get_test_traces\n')
     sys.exit(1)
 
 def main():
@@ -146,6 +190,9 @@ def main():
             sys.exit(1)
         heuristic_level = int(sys.argv[2])
         extend_debloat('grep', heuristic_level)
+
+    elif sys.argv[1] == "get_test_traces":
+        get_traces_for_test("logs", "grep")
 
     elif sys.argv[1] == 'clean':
         clean()

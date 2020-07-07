@@ -29,6 +29,20 @@ def test():
         cmd = BIN + ' -c < ' + fpath + ' > tmp.log'
         execute(cmd)
 
+def get_traces_for_test(logs_dir, prog_name):
+    BIN = './gzip.orig'
+
+    for fname in os.listdir('test'):
+        fpath = os.path.join('test', fname)
+        # -c
+        cmd = BIN + ' -c < ' + fpath + ' > tmp.log'
+        cmd = DRRUN + ' -c ' + CLIENT + ' -- ' + cmd
+        execute(cmd)
+    execute("""python ../../../stitcher/src/merge_log.py %s %s""" % (logs_dir, prog_name))
+    execute("""mkdir -p ./backup""")
+    execute("""mv %s/%s-trace.log ./backup/""" % (logs_dir, prog_name))
+
+
 def debloat(logs_dir, prog_name):
     execute("""python ../../../stitcher/src/merge_log.py %s %s""" % (logs_dir, prog_name))
     execute("""mv %s/%s-trace.log ./""" % (logs_dir, prog_name))
@@ -50,7 +64,7 @@ def clean():
         if fname == "run_razor.py":
             continue
         
-        if fname == 'test' or fname == 'train':
+        if fname == 'test' or fname == 'train' or fname == "backup":
             continue
 
         if fname == "gzip.orig" or fname == "gzip-1.2.4.c.orig.c":
@@ -59,7 +73,7 @@ def clean():
         execute('rm -rf ./' + fname)
 
 def usage():
-    print('python run_razor.py clean|train|test|debloat|extend_debloat\n')
+    print('python run_razor.py clean|train|test|debloat|extend_debloat|get_test_traces\n')
     sys.exit(1)
 
 def main():
@@ -88,6 +102,9 @@ def main():
             sys.exit(1)
         heuristic_level = int(sys.argv[2])
         extend_debloat('gzip', heuristic_level)
+
+    elif sys.argv[1] == "get_test_traces":
+        get_traces_for_test("logs", "gzip")
 
     elif sys.argv[1] == 'clean':
         clean()

@@ -29,6 +29,20 @@ def test():
         cmd = BIN + ' cf tmp.tar ' + fpath
         execute(cmd)
 
+def get_traces_for_test(logs_dir, prog_name):
+    BIN = './tar.orig'
+
+    for fname in os.listdir('test'):
+        fpath = os.path.join('test', fname)
+        # -c
+        cmd = BIN + ' cf tmp.tar ' + fpath
+        cmd = DRRUN + ' -c ' + CLIENT + ' -- ' + cmd
+        execute(cmd)
+
+    execute("""python ../../../stitcher/src/merge_log.py %s %s""" % (logs_dir, prog_name))
+    execute("""mkdir -p ./backup""")
+    execute("""mv %s/%s-trace.log ./backup/""" % (logs_dir, prog_name))
+
 def debloat(logs_dir, prog_name):
     execute("""python ../../../stitcher/src/merge_log.py %s %s""" % (logs_dir, prog_name))
     execute("""mv %s/%s-trace.log ./""" % (logs_dir, prog_name))
@@ -50,7 +64,7 @@ def clean():
         if fname == "run_razor.py":
             continue
         
-        if fname == 'test' or fname == 'train':
+        if fname == 'test' or fname == 'train' or fname == "backup":
             continue
 
         if fname == "tar.orig" or fname == "tar-1.14.c.orig.c":
@@ -59,7 +73,7 @@ def clean():
         execute('rm -rf ./' + fname)
 
 def usage():
-    print('python run_razor.py clean|train|test|debloat|extend_debloat\n')
+    print('python run_razor.py clean|train|test|debloat|extend_debloat|get_test_traces\n')
     sys.exit(1)
 
 def main():
@@ -80,16 +94,6 @@ def main():
         test()
 
     elif sys.argv[1] == 'debloat':
-        debloat('logs', 'bzip2')
-
-    
-    if sys.argv[1] == 'train':
-        train()
-    
-    elif sys.argv[1] == 'test':
-        test()
-
-    elif sys.argv[1] == 'debloat':
         debloat('logs', 'tar')
 
     elif sys.argv[1] == 'extend_debloat':
@@ -98,6 +102,9 @@ def main():
             sys.exit(1)
         heuristic_level = int(sys.argv[2])
         extend_debloat('tar', heuristic_level)
+    
+    elif sys.argv[1] == "get_test_traces":
+        get_traces_for_test("logs", "tar")
 
     elif sys.argv[1] == 'debloat_patch':
         debloat_patch('tar')

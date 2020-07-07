@@ -48,6 +48,20 @@ def test():
         test_run("-w 10", d + fname)
     return
 
+def get_traces_for_test(logs_dir, prog_name):
+    d = 'test/'
+    for fname in os.listdir(d):
+        train_run("", d + fname)
+        train_run("-c", d + fname)
+        train_run("-d", d + fname)
+        train_run("-u", d + fname)
+        train_run("-i", d + fname)
+        train_run("-f 5", d + fname)
+        train_run("-s 10", d + fname)
+        train_run("-w 10", d + fname)
+    execute("""python ../../../stitcher/src/merge_log.py %s %s""" % (logs_dir, prog_name))
+    execute("""mkdir -p ./backup""")
+    execute("""mv %s/%s-trace.log ./backup/""" % (logs_dir, prog_name))
 
 def debloat(logs_dir, prog_name):
     execute("""python ../../../stitcher/src/merge_log.py %s %s""" % (logs_dir, prog_name))
@@ -70,7 +84,7 @@ def clean():
         if fname == "run_razor.py":
             continue
         
-        if fname.startswith('test') or fname.startswith('train'):
+        if fname.startswith('test') or fname.startswith('train') or fname == "backup":
             continue
         
         if fname == "uniq.orig" or fname == "uniq-8.16.c.orig.c":
@@ -79,7 +93,7 @@ def clean():
         execute('rm -rf ./' + fname)
 
 def usage():
-    print('python run_razor.py clean|train|test|debloat|extend_debloat\n')
+    print('python run_razor.py clean|train|test|debloat|extend_debloat|get_test_traces\n')
     sys.exit(1)
 
 def main():
@@ -108,6 +122,9 @@ def main():
             sys.exit(1)
         heuristic_level = int(sys.argv[2])
         extend_debloat('uniq', heuristic_level)
+
+    elif sys.argv[1] == "get_test_traces":
+        get_traces_for_test("logs", "uniq")
 
     elif sys.argv[1] == 'clean':
         clean()

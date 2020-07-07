@@ -28,7 +28,6 @@ def test():
         fpath = os.path.join('test', fname)
         # -c
         cmd = BIN + ' -c < ' + fpath + ' > tmp.log'
-        print(cmd)
         execute(cmd)
 
 def get_traces_for_test(logs_dir, prog_name):
@@ -39,7 +38,6 @@ def get_traces_for_test(logs_dir, prog_name):
         # -c
         cmd = BIN + ' -c < ' + fpath + ' > tmp.log'
         cmd = DRRUN + ' -c ' + CLIENT + ' -- ' + cmd
-        print(cmd)
         execute(cmd)
     execute("""python ../../../stitcher/src/merge_log.py %s %s""" % (logs_dir, prog_name))
     execute("""mkdir -p ./backup""")

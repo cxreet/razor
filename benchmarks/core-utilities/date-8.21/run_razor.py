@@ -113,6 +113,45 @@ def test():
     test_run(""" -d "1997-01-19 08:17:48 +0 next day" '+%Y-%m-%d %T' """)
     return
 
+def get_traces_for_test(logs_dir, prog_name):
+    train_run("""--date '02/29/1997 1 year' +%Y-%m-%d""")
+    train_run("""--date '1995-1-7' +%U""")
+    train_run("""--date '1995-1-8' +%U""")
+    train_run("""--date '1992-1-1' +%U""")
+    train_run("""--date '1992-1-4' +%U """)
+    train_run(""" --date '1992-1-5' +%U """)
+    train_run(""" --date '1992-1-5' +%V """)
+    train_run(""" --date '1992-1-6' +%V """)
+    train_run(""" --date '1992-1-5' +%W """)
+    train_run(""" --date '1992-1-6' +%W """)
+    train_run(""" --date '1999-1-1 4 years' +%Y """)
+    train_run(""" -d 'TZ="America/New_York" 9:00 next Fri' """)
+    train_run(""" -d "1990-11-08 08:17:48 +0 now" "+%Y-%m-%d %T" """)
+    train_run(""" -d "1990-11-08 08:17:48 +0 yesterday" "+%Y-%m-%d %T" """)
+    train_run(""" -d "1990-11-08 08:17:48 +0 tomorrow" "+%Y-%m-%d %T" """)
+    train_run(""" -d "1990-11-08 08:17:48 +0 10 years ago" "+%Y-%m-%d %T"   """)
+    train_run(""" -d "1990-11-08 08:17:48 +0 8 months ago" "+%Y-%m-%d %T" """)
+    train_run(""" -d "1990-11-08 08:17:48 +0 80 weeks ago" "+%Y-%m-%d %T" """)
+    train_run(""" -d '2005-03-27 +4 months' '+%Y' """)
+    train_run(""" -d @-22 +%10s """)
+    train_run(""" -d 1999-12-08 +%08d """)
+    train_run(""" --rfc-3339=ns -d "1969-12-31 13:00:00.00000001-1100" """)
+    train_run(""" --rfc-3339=sec -d @31536000 """)
+    train_run(""" --utc -d '1970-01-01 00:00:00 UTC +961062237 sec' "+%Y-%m-%d %T" """)
+    train_run(""" -d 'Nov 10 1996' "+%Y-%m-%d %T" """)
+    train_run(""" -u -d '1996-11-10 0:00:00 +0' "+%Y-%m-%d %T" """)
+    train_run(""" -d "1997-01-19 08:17:48 +0 4 seconds ago" "+%Y-%m-%d %T" """)
+    train_run(""" -d '20050101  1 day' +%F """)
+    train_run(""" -d '20050101 +1 day' +%F """)
+    train_run(""" -d "1997-01-19 08:17:48 +0 next second" '+%Y-%m-%d %T' """)
+    train_run(""" -d "1997-01-19 08:17:48 +0 next minute" '+%Y-%m-%d %T' """)
+    train_run(""" -d "1997-01-19 08:17:48 +0 next hour" '+%Y-%m-%d %T' """)
+    train_run(""" -d "1997-01-19 08:17:48 +0 next day" '+%Y-%m-%d %T' """)
+
+    execute("""python ../../../stitcher/src/merge_log.py %s %s""" % (logs_dir, prog_name))
+    execute("""mkdir -p ./backup""")
+    execute("""mv %s/%s-trace.log ./backup/""" % (logs_dir, prog_name))
+
 def debloat(logs_dir, prog_name):
     execute("""python ../../../stitcher/src/merge_log.py %s %s""" % (logs_dir, prog_name))
     execute("""mv %s/%s-trace.log ./""" % (logs_dir, prog_name))
@@ -134,7 +173,7 @@ def clean():
         if fname == "run_razor.py":
             continue
         
-        if fname == 'test' or fname == 'train':
+        if fname == 'test' or fname == 'train' or fname == "backup":
             continue
         
         if fname == "date.orig" or fname == "date-8.21.c.orig.c":
@@ -143,7 +182,7 @@ def clean():
         execute('rm -rf ./' + fname)
 
 def usage():
-    print('python run_razor.py clean|train|test|debloat|extend_debloat\n')
+    print('python run_razor.py clean|train|test|debloat|extend_debloat|get_test_traces\n')
     sys.exit(1)
 
 def main():
@@ -172,6 +211,9 @@ def main():
             sys.exit(1)
         heuristic_level = int(sys.argv[2])
         extend_debloat('date', heuristic_level)
+
+    elif sys.argv[1] == "get_test_traces":
+        get_traces_for_test('logs', 'date')
 
     elif sys.argv[1] == 'clean':
         clean()

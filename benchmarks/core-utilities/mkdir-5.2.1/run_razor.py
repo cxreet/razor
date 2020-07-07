@@ -117,6 +117,59 @@ def test():
     execute("""rm -rf d1  d2 d3""")
     return
 
+def get_traces_for_test(logs_dir, prog_name):
+    train_run("", "d1/d2/d3")
+    execute('rm -rf d1')
+
+    train_run("-p", "d1/d2/d3")
+    execute('rm -rf d1')
+
+    train_run("-p -m 567", "d1/d2/d3")
+    execute('rm -rf d1')
+
+    train_run("-m 777", "d1/d2")
+    execute('rm -rf d1')
+
+    train_run("-p -m 777", "d1/d2/d3")
+    execute('rm -rf d1')
+
+    train_run("-p -m 777", "d1/d2/d3")
+    train_run("-p -m 500", "d1/d2/d3/d4")
+    execute('rm -rf d1')
+
+    train_run("-p -m 555", "d1/d2/d3/d4")
+    train_run("-m 644", "d1/d2/d3/d5")
+    train_run("-m 610", "d1/d6")
+    train_run("-m 777", "d1/d6/d7")
+    execute('rm -rf d1')
+
+    train_run("-p -m 777", "d1/d2/d3")
+    train_run("-m 555", "d1/d2/d3")
+    train_run("-m 644", "d1/d2/d3/d4")
+    train_run("-m 610", "d1/d2/d3/d4/d5")
+    train_run("-m 777", "d1/d2/d3/d4/d5/d6")
+    execute('rm -rf d1')
+
+    train_run("-p -m 777", "d1/d2/d3")
+    train_run("-m 555", "d1/d2/d4")
+    train_run("-m 644", "d1/d2/d5")
+    train_run("-m 610", "d1/d2/d6")
+    train_run("-m 777", "d1/d2/d7")
+    execute('rm -rf d1')
+
+    train_run("-p", "d1/d2/d3")
+    train_run("-p", "d1/d2/d3/d4")
+    train_run("-p", "d1/d2/d3/d5")
+    train_run("-p", "d1/d2/d3/d5/d6")
+    execute("""rm -rf d1""")
+
+    execute("""rm -rf d1  d2 d3""")
+
+    execute("""python ../../../stitcher/src/merge_log.py %s %s""" % (logs_dir, prog_name))
+    execute("""mkdir -p ./backup""")
+    execute("""mv %s/%s-trace.log ./backup/""" % (logs_dir, prog_name))
+
+
 def debloat(logs_dir, prog_name):
     execute("""python ../../../stitcher/src/merge_log.py %s %s""" % (logs_dir, prog_name))
     execute("""mv %s/%s-trace.log ./""" % (logs_dir, prog_name))
@@ -138,7 +191,7 @@ def clean():
         if fname == "run_razor.py":
             continue
         
-        if fname.startswith('test') or fname.startswith('train'):
+        if fname.startswith('test') or fname.startswith('train') or fname == "backup":
             continue
         
         if fname == "mkdir.orig" or fname == "mkdir-5.2.1.c.orig.c":
@@ -147,7 +200,7 @@ def clean():
         execute('rm -rf ./' + fname)
 
 def usage():
-    print('python run_razor.py clean|train|test|debloat|extend_debloat\n')
+    print('python run_razor.py clean|train|test|debloat|extend_debloat|get_test_traces\n')
     sys.exit(1)
 
 def main():
@@ -176,6 +229,9 @@ def main():
             sys.exit(1)
         heuristic_level = int(sys.argv[2])
         extend_debloat('mkdir', heuristic_level)
+    
+    elif sys.argv[1] == "get_test_traces":
+        get_traces_for_test('logs', 'mkdir')
 
     elif sys.argv[1] == 'clean':
         clean()
