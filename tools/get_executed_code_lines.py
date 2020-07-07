@@ -26,7 +26,7 @@ def get_executed_bbs(trace):
     return executed_bbs
 
 def main():
-    usage = "usage: %prog trace.log progrom_bin program_source_code output_file"
+    usage = "usage: %prog -t trace.log -b progrom_bin -s program_source_code -o output_file"
     parser = OptionParser(usage=usage)
 
     parser.add_option("-t", "--trace", dest="trace", help="The trace log.")
@@ -40,7 +40,7 @@ def main():
     prog_source = options.source
     output_file = options.output
 
-    if (not trace) or (not prog_bin) or (not prog_source):
+    if (not trace) or (not prog_bin) or (not prog_source) or (not output_file):
         parser.print_help()
         sys.exit(1)
 
