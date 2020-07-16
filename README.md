@@ -9,4 +9,4 @@ eral control-flow heuristics to infer complementary code that
 are necessary to support user-expected functionalities.
 
 
-Please follow the instructions [here] (https://github.com/cxreet/razor/wiki) to play around with Razor.
+Please follow the instructions here (https://github.com/cxreet/razor/wiki) to play around with Razor.
