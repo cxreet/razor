@@ -106,7 +106,14 @@ def find_symbols_for_plt(binname, asmname, callbacks_file_name="callbacks.txt"):
 
     #print plt_impl_bb_addr
 
-    relocations_in_rela_plt = eb.get_relocation_info(binname)
+    relocations_in_rela_plt = eb.get_relocation_info(binname, ".rela.plt")
+    relocations_in_rela_dyn = eb.get_relocation_info(binname, ".rela.dyn")
+    libc_start_main_in_plt = True
+    libc_start_main_in_dyn_addr = 0
+    for i in relocations_in_rela_dyn:
+        if "__libc_start_main" in i["name"]:
+            libc_start_main_in_plt = False
+            libc_start_main_in_dyn_addr = i["offset"]
 
     # find all plt functions
     with open(asmname, "r") as asm_file:
@@ -178,6 +185,33 @@ def find_symbols_for_plt(binname, asmname, callbacks_file_name="callbacks.txt"):
                         for arg in arguments:
                             if not arg in arg_done:
                                 print >> sys.stderr, "Warnning: the " + str(arg) + " argument of " + label2pltname[callee] + " cannot be found"
+                                print >> sys.stderr, "          called at"
+                                for line in bb:
+                                    print >> sys.stderr, "          ", line
+
+                elif libc_start_main_in_plt == False:
+                    if hex(libc_start_main_in_dyn_addr) in instr and "rip" in instr:
+                        arguments = map(arg2reg, libcalls["__libc_start_main"])
+                        arg_done = {}
+                        # for every instruction (backwards)
+                        for index in xrange(len(bb)-1, 0, -1):
+                            # for every interesting argument
+                            for arg in arguments:
+                                # if not resolved yet
+                                if arg in arg_done:
+                                    continue
+                                instr = bb[index]
+                                m = pattern.match(instr)
+                                if m != None and arg in instr:
+                                    #print "matched", instr
+                                    #print m.group("imm")
+                                    #print label, index
+                                    callbacks_file.write(label + " " + str(index) + "\n")
+                                    arg_done[arg] = 0
+
+                        for arg in arguments:
+                            if not arg in arg_done:
+                                print >> sys.stderr, "Warnning: the " + str(arg) + " argument of __libc_start_main cannot be found"
                                 print >> sys.stderr, "          called at"
                                 for line in bb:
                                     print >> sys.stderr, "          ", line

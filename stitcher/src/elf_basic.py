@@ -326,7 +326,7 @@ class elf_basic(object):
         os.write(fd, pack(pack_fmt, value));
         os.close(fd);
 
-    def get_relocation_info(self, binname):
+    def get_relocation_info(self, binname, rel_sec_name):
 	pattern = re.compile(r"^(?P<offset>[0-9a-fA-F]{1,16})\s+"
 			      "(?P<info>[0-9a-fA-F]{1,16})\s+"
                               "(?P<type>[^\s]+)\s+"
@@ -334,28 +334,29 @@ class elf_basic(object):
 		              "(?P<name>[^\n]+)$")
 	cmd = ["readelf", "-rW", binname]
 	relocation_results = subprocess.check_output(cmd)
-	find_rela_plt = False
-        relocations_in_rela_plt = []
+	find_rel_sec = False
+        relocations = []
 	for line in relocation_results.split('\n'):
             line = line.strip()
-            if find_rela_plt == False:
-                if ".rela.plt" in line:
-                    find_rela_plt = True
+            if find_rel_sec == False:
+                if rel_sec_name in line:
+                    # find start
+                    find_rel_sec = True
                 else:
                     continue
             else:
+                # find end
+                if "Relocation section" in line:
+                    break
                 m = pattern.match(line)
                 if m != None:
-                    relocations_in_rela_plt.append({"offset" : int(m.group("offset"), 16), 
-                                                    "info"   : int(m.group("info"), 16),
-                                                    "type"   : m.group("type"),
-                                                    "symvalue" : int(m.group("symvalue"), 16),
-                                                    "name"   : m.group("name")
-                                                    })
-        return relocations_in_rela_plt
-
-
-
+                    relocations.append({"offset" : int(m.group("offset"), 16),
+                                        "info"   : int(m.group("info"), 16),
+                                        "type"   : m.group("type"),
+                                        "symvalue" : int(m.group("symvalue"), 16),
+                                        "name"   : m.group("name")
+                                        })
+        return relocations
 
     def get_dynamic_offset_size(self, binname):
         phdr_num = self.get_elfhdr_info(binname, "Number of program headers:");
