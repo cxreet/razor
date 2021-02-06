@@ -109,7 +109,7 @@ def extend_phdr(binname):
     #relocate_interp(binname)
 
     # change the original text segment to read-only
-    eb.modify_phdr_info(binname, PHDR.PT_LOAD, PHDR.p_flags_offset, PHDR.PF_R)
+    eb.modify_phdr_info_ex(binname, PHDR.PT_LOAD, PHDR.PF_X, PHDR.p_flags_offset, PHDR.PF_R)
 
     #now get the PHDR information
     phdr_num = eb.get_elfhdr_info(binname, "Number of program headers:");

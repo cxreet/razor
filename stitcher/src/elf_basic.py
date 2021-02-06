@@ -184,6 +184,36 @@ class elf_basic(object):
 
         os.close(fd);
 
+    def modify_phdr_info_ex(self, binname, seg_type, seg_perm, in_seg_offset, value):
+        phdr_num = self.get_elfhdr_info(binname, "Number of program headers:");
+        phdr_size = self.get_elfhdr_info(binname,"Size of program headers:");
+        phdr_start = self.get_elfhdr_info(binname,"Start of program headers:");
+        fd = os.open(binname, os.O_RDWR);
+        # go to the beginning of the program headers
+        os.lseek(fd, phdr_start, os.SEEK_SET)
+        p_offset = 0
+
+        for idx in xrange(0, phdr_num):
+            # get segment type
+            os.lseek(fd, PHDR.p_type_offset, os.SEEK_CUR)
+            ptype = unpack(pfmt(PHDR.p_type_size), os.read(fd, PHDR.p_type_size))[0];
+            os.lseek(fd, -(PHDR.p_type_offset + PHDR.p_type_size), os.SEEK_CUR)
+            # get segment permission
+            os.lseek(fd, PHDR.p_flags_offset, os.SEEK_CUR)
+            pflags = unpack(pfmt(PHDR.p_flags_size), os.read(fd, PHDR.p_flags_size))[0];
+            os.lseek(fd, -(PHDR.p_flags_offset + PHDR.p_flags_size), os.SEEK_CUR)
+
+            #print "idx:%x, type:%x" % (idx, ptype)
+            if (ptype == seg_type) and ((pflags & seg_perm) != 0):
+                break
+            os.lseek(fd, phdr_size, os.SEEK_CUR)
+
+        os.lseek(fd, in_seg_offset, os.SEEK_CUR)
+        attribute_size = PHDR.offset2size[in_seg_offset]
+        os.write(fd, pack(pfmt(attribute_size), value));
+
+        os.close(fd)
+
     def modify_phdr_info(self, binname, seg_type, in_seg_offset, value):
         phdr_num = self.get_elfhdr_info(binname, "Number of program headers:");
         phdr_size = self.get_elfhdr_info(binname,"Size of program headers:");
