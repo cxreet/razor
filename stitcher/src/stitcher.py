@@ -227,10 +227,31 @@ def is_hex_str(s):
     return True
 
 def generate_div_0(n, out_f):
-    out_f.write('\t\tmov edx, 0\n')
-    out_f.write('\t\tmov eax, %d\n' % n)
-    out_f.write('\t\tmov ecx, 0\n')
-    out_f.write('\t\tdiv ecx\n')
+    if n < 10 or n >= 100:
+        print("Wrong, generate wrong div")
+    # int to ascii char
+    tens = n // 10 + 48
+    nos = n % 10 + 48
+    # write number
+    out_f.write('\t\tsub rsp, 8\n')
+    out_f.write('\t\tmov dword ptr [rsp], %d\n' % tens)
+    out_f.write('\t\tmov dword ptr [rsp+1], %d\n' % nos)
+    out_f.write('\t\tmov dword ptr [rsp+2], 10\n')
+    out_f.write('\t\tmov rax, 1\n')
+    out_f.write('\t\tmov rdi, 1\n')
+    out_f.write('\t\tmov rsi, rsp\n')
+    out_f.write('\t\tmov rdx, 3\n')
+    out_f.write('\t\tsyscall\n')
+    out_f.write('\n')
+    # sys_exit
+    out_f.write('\t\tmov rax, 60\n')
+    out_f.write('\t\txor rdi, rdi\n')
+    out_f.write('\t\tsyscall\n')
+    # original divide 0
+    #out_f.write('\t\tmov edx, 0\n')
+    #out_f.write('\t\tmov eax, %d\n' % n)
+    #out_f.write('\t\tmov ecx, 0\n')
+    #out_f.write('\t\tdiv ecx\n')
 
 """
 For all untrigerred conditional branches, create dummy code as the target.
